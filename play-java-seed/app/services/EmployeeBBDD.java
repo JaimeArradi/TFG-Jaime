@@ -22,13 +22,13 @@ public class EmployeeBBDD {
         return instance;
     }
 
-    Database database = Databases.createFrom("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/tfg");
+    Database database = Databases.createFrom("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/tfg_motos");
 
     private static Connection con;
     private static final String driver="com.mysql.jdbc.Driver";
     private static final String user="root";
     private static final String pass="root";
-    private static final String url="jdbc:mysql://localhost:3306/tfg";
+    private static final String url="jdbc:mysql://localhost:3306/tfg_motos";
 
 
     private Statement createStatement;
