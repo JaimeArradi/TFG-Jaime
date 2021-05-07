@@ -45,7 +45,7 @@ public class EmployeeBBDD {
             //  String valor= "fallo";
             Class.forName(driver);
             // Nos conectamos a la bd
-            con= (com.mysql.jdbc.Connection) DriverManager.getConnection(url, user, pass);
+            con=DriverManager.getConnection(url, user, pass);
             // Si la conexion fue exitosa mostramos un mensaje de conexion exitosa
             if (con!=null){
 
