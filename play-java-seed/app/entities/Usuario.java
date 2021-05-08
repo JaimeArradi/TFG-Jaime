@@ -9,7 +9,6 @@ public class Usuario {
     private String carne;
     private int dificultad;
     private int valoracion;
-    private int duracion;
     private Moto moto;
     private int intercomunicador;
 
@@ -69,14 +68,6 @@ public class Usuario {
 
     public void setValoracion(int valoracion) {
         this.valoracion = valoracion;
-    }
-
-    public int getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(int duracion) {
-        this.duracion = duracion;
     }
 
     public String getCarne() {
