@@ -1,17 +1,18 @@
-import play.sbt.PlayImport.jdbc
+name := """play-java-seed"""
+organization := "com.rest"
 
-name := """PlayREST"""
-organization := "com.aj"
-
-version := "1.0"
+version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
-scalaVersion := "2.12.2"
+scalaVersion := "2.13.2"
 
+libraryDependencies += guice
 
 libraryDependencies ++= Seq(
-  guice,
-  javaJdbc,
+   javaJdbc
+)
+
+libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "8.0.23"
 )

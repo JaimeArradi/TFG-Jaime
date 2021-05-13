@@ -1,5 +1,5 @@
 package services;
-import entities.Employee;
+import entities.*;
 
 import play.db.*;
 import java.sql.Connection;
@@ -14,25 +14,18 @@ import java.util.logging.Logger;
 
 public class EmployeeBBDD {
 
-    private static EmployeeBBDD instance;
+    private static final EmployeeBBDD instance=new EmployeeBBDD();
     public static EmployeeBBDD getInstance() {
-        if (instance == null) {
-            instance = new EmployeeBBDD();
-        }
         return instance;
     }
 
-    Database database = Databases.createFrom("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/tfg_motos");
-
     private static Connection con;
-    private static final String driver="com.mysql.jdbc.Driver";
-    private static final String user="root";
-    private static final String pass="root";
-    private static final String url="jdbc:mysql://localhost:3306/tfg_motos";
-
-
+    private static final String driver="com.mysql.cj.jdbc.Driver";//"com.mysql.jdbc.Driver";
+    private static final String user="alberto";
+    private static final String pass="alberto";
+    private static final String url="jdbc:mysql://localhost:3306/tfg-motos";
+    Database database = Databases.createFrom(driver, url);
     private Statement createStatement;
-
     private ResultSet rS;
 
     protected boolean conector() throws SQLException, ClassNotFoundException {
@@ -48,9 +41,12 @@ public class EmployeeBBDD {
             con=DriverManager.getConnection(url, user, pass);
             // Si la conexion fue exitosa mostramos un mensaje de conexion exitosa
             if (con!=null){
-
+                System.out.println("La conexión no es nula");
                 createStatement = con.createStatement();
                 valor= true;
+            }
+            else{
+                System.out.println("La conexión es nula");
             }
         }
         //Si la conexion NO fue exitosa mostramos un mensaje de error

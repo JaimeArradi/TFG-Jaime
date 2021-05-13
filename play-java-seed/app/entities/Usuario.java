@@ -82,8 +82,8 @@ public class Usuario {
         return moto;
     }
 
-    public void setMoto(Moto moto) {
-        this.moto = moto;
+    public void setMoto(Moto m) {
+        moto = m;
     }
 
     public int getIntercomunicador() {
