@@ -5,6 +5,7 @@ public class Usuario {
     private String name;
     private int edad;
     private String sexo;
+    private String bio;
     private String terreno;
     private String carne;
     private int dificultad;
@@ -36,6 +37,14 @@ public class Usuario {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public int getEdad() {

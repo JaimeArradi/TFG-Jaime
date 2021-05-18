@@ -4,11 +4,12 @@ public class Rutas {
     private int id;
     private String name;
     private String tipo;
+    private String recorrido;
     private int km;
     private String estadoAsfalto;
     private String terreno;
     private int dificultad;
-    private int valoracion;
+    private Valoracion valoracion;
     private int duracion;
 
 
@@ -35,6 +36,14 @@ public class Rutas {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getRecorrido() {
+        return recorrido;
+    }
+
+    public void setRecorrido(String recorrido) {
+        this.recorrido = recorrido;
     }
 
     public int getKm() {
@@ -69,11 +78,11 @@ public class Rutas {
         this.dificultad = dificultad;
     }
 
-    public int getValoracion() {
+    public Valoracion getValoracion() {
         return valoracion;
     }
 
-    public void setValoracion(int valoracion) {
+    public void setValoracion(Valoracion valoracion) {
         this.valoracion = valoracion;
     }
 
