@@ -3,7 +3,7 @@ package entities;
 public class Valoracion {
     private int id;
     private Usuario usuario;
-    private Rutas ruta;
+    private Ruta ruta;
     private String comentario;
     private int valoracion;
 
@@ -23,11 +23,11 @@ public class Valoracion {
         this.usuario = usuario;
     }
 
-    public Rutas getRuta() {
+    public Ruta getRuta() {
         return ruta;
     }
 
-    public void setRuta(Rutas ruta) {
+    public void setRuta(Ruta ruta) {
         this.ruta = ruta;
     }
 

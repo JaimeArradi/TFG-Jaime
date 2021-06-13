@@ -1,6 +1,6 @@
 package entities;
 
-public class Rutas {
+public class Ruta {
     private int id;
     private String name;
     private String tipo;

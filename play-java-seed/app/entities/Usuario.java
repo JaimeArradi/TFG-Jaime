@@ -7,7 +7,7 @@ public class Usuario {
     private enum Sexo {HOMBRE, MUJER}
     private Sexo sexo;
     private String bio;
-    private Rutas.Terreno terreno;
+    private Ruta.Terreno terreno;
     public enum Carne {A1, A2, A}
     private Carne carne;
     private int nivel;
@@ -57,11 +57,11 @@ public class Usuario {
         this.edad = edad;
     }
 
-    public Rutas.Terreno getTerreno() {
+    public Ruta.Terreno getTerreno() {
         return terreno;
     }
 
-    public void setTerreno(Rutas.Terreno terreno) {
+    public void setTerreno(Ruta.Terreno terreno) {
         this.terreno = terreno;
     }
 

@@ -8,7 +8,7 @@ public class Quedada {
     private String lugarFinal;
     private Usuario[] usuarios;
     private Usuario[] usuariosInv;
-    private Rutas ruta;
+    private Ruta ruta;
     private String paradas; //coordenadas
     private int valoracion;
 
@@ -51,11 +51,11 @@ public class Quedada {
     public void setLugarFinal(String lugarFinal) {
         this.lugarFinal = lugarFinal;
     }
-    public Rutas getRuta() {
+    public Ruta getRuta() {
         return ruta;
     }
 
-    public void setRuta(Rutas ruta) {
+    public void setRuta(Ruta ruta) {
         this.ruta = ruta;
     }
 
