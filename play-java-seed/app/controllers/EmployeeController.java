@@ -1,6 +1,6 @@
 package controllers;
 
-import play.*; 
+import play.*;
 import play.mvc.Http;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,9 +25,9 @@ import org.json.JSONObject;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Set;
- 
+
 public class EmployeeController extends Controller {
- 
+
     private static final Logger logger = LoggerFactory.getLogger("controller");
 
     public Result create(Http.Request request) throws SQLException, ClassNotFoundException {
@@ -65,13 +65,14 @@ public class EmployeeController extends Controller {
         if (employee == null) {
             return notFound(ApplicationUtil.createResponse("Employee not found", false));
         }
- 
+
         JsonNode jsonObject = Json.toJson(employee);
         return ok(ApplicationUtil.createResponse(jsonObject, true));
     }
     */
 
-    public Result update(Http.Request request) throws SQLException, ClassNotFoundException {
+    //en el update le oaso tb el id para identificarlo como en retrive
+    public Result update(Http.Request request, int id) throws SQLException, ClassNotFoundException {
         logger.debug("In EmployeeController.update()");
         JsonNode json = request.body().asJson();
         if (json == null) {
@@ -145,10 +146,10 @@ public class EmployeeController extends Controller {
         Set<Employee> result = EmployeeBBDD.getInstance().getAllEmployees();
         logger.debug("In EmployeeController.listEmployees(), result is: {}",result.toString());
         ObjectMapper mapper = new ObjectMapper();
- 
+
         JsonNode jsonData = mapper.convertValue(result, JsonNode.class);
         return ok(ApplicationUtil.createResponse(jsonData, true));
- 
+
     }
     */
     public Result listEmployees() {

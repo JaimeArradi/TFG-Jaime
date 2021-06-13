@@ -2,7 +2,8 @@ package entities;
 
 public class Moto {
     private int id;
-    private String estilo;
+    public enum Estilo {TRAIL, R, CUSTOM, NAKED}
+    private Estilo estilo;
     private String marca;
     private String modelo;
     private int potencia;
@@ -15,11 +16,9 @@ public class Moto {
         this.id = id;
     }
 
-    public String getEstilo() {
-        return estilo;
-    }
+    public Estilo getEstilo() { return estilo; }
 
-    public void setEstilo(String estilo) {
+    public void setEstilo(Estilo estilo) {
         this.estilo = estilo;
     }
 

@@ -6,11 +6,15 @@ public class Rutas {
     private String tipo;
     private String recorrido;
     private int km;
-    private String estadoAsfalto;
-    private String terreno;
+    public enum EstadoAsfalto {BUENO, INTERMEDIO, MALO}
+    private EstadoAsfalto estadoAsfalto;
+    public enum Terreno {ASFALTO, HIBRIDO, TIERRA}
+    private Terreno terreno;
     private int dificultad;
     private Valoracion valoracion;
     private int duracion;
+    public enum Trafico {ALTO, INTERMEDIO, BAJO}
+    private Trafico trafico;
 
 
 
@@ -54,19 +58,19 @@ public class Rutas {
         this.km = km;
     }
 
-    public String getEstadoAsfalto() {
+    public EstadoAsfalto getEstadoAsfalto() {
         return estadoAsfalto;
     }
 
-    public void setEstadoAsfalto(String estadoAsfalto) {
+    public void setEstadoAsfalto(EstadoAsfalto estadoAsfalto) {
         this.estadoAsfalto = estadoAsfalto;
     }
 
-    public String getTerreno() {
+    public Terreno getTerreno() {
         return terreno;
     }
 
-    public void setTerreno(String terreno) {
+    public void setTerreno(Terreno terreno) {
         this.terreno = terreno;
     }
 

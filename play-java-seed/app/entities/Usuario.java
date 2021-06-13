@@ -4,14 +4,16 @@ public class Usuario {
     private int id;
     private String name;
     private int edad;
-    private String sexo;
+    private enum Sexo {HOMBRE, MUJER}
+    private Sexo sexo;
     private String bio;
-    private String terreno;
-    private String carne;
-    private int dificultad;
+    private Rutas.Terreno terreno;
+    public enum Carne {A1, A2, A}
+    private Carne carne;
+    private int nivel;
     private int valoracion;
     private Moto moto;
-    private int intercomunicador;
+    private Boolean intercomunicador;
 
 
 
@@ -31,11 +33,11 @@ public class Usuario {
         this.name = name;
     }
 
-    public String getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
 
@@ -55,20 +57,20 @@ public class Usuario {
         this.edad = edad;
     }
 
-    public String getTerreno() {
+    public Rutas.Terreno getTerreno() {
         return terreno;
     }
 
-    public void setTerreno(String terreno) {
+    public void setTerreno(Rutas.Terreno terreno) {
         this.terreno = terreno;
     }
 
-    public int getDificultad() {
-        return dificultad;
+    public int getNivel() {
+        return nivel;
     }
 
-    public void setDificultad(int dificultad) {
-        this.dificultad = dificultad;
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
     }
 
     public int getValoracion() {
@@ -79,11 +81,11 @@ public class Usuario {
         this.valoracion = valoracion;
     }
 
-    public String getCarne() {
+    public Carne getCarne() {
         return carne;
     }
 
-    public void setCarne(String carne) {
+    public void setCarne(Carne carne) {
         this.carne = carne;
     }
 
@@ -95,11 +97,11 @@ public class Usuario {
         moto = m;
     }
 
-    public int getIntercomunicador() {
+    public Boolean getIntercomunicador() {
         return intercomunicador;
     }
 
-    public void setIntercomunicador(int intercomunicador) {
+    public void setIntercomunicador(Boolean intercomunicador) {
         this.intercomunicador = intercomunicador;
     }
 

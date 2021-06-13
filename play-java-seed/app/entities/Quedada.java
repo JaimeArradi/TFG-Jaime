@@ -9,7 +9,7 @@ public class Quedada {
     private Usuario[] usuarios;
     private Usuario[] usuariosInv;
     private Rutas ruta;
-    private String paradas;
+    private String paradas; //coordenadas
     private int valoracion;
 
     public int getId() {
