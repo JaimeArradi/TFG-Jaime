@@ -45,8 +45,9 @@ public class EmployeeController extends Controller {
         }
         JsonNode jsonObjects = Json.toJson(EmployeeBBDD.getInstance().getEmployee(id));
         Employee employee = EmployeeBBDD.getInstance().updateEmployee(Json.fromJson(jsonObjects, Employee.class));
+        JsonNode jsonObject = Json.toJson(employee);
         logger.debug("In EmployeeController.update(), employee is: {}",employee);
-        return ok(ApplicationUtil.createResponse(jsonObjects, true));
+        return created(ApplicationUtil.createResponse(jsonObjects, true));
     }
 
     public Result retrieve(int id) {

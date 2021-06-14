@@ -16,10 +16,10 @@ public class Moto {
         this.id = id;
     }
 
-    public Estilo getEstilo() { return estilo; }
+    public String getEstilo() { return estilo.toString(); } //Por que no vale esto: Estilo.valueOf(estilo)
 
-    public void setEstilo(Estilo estilo) {
-        this.estilo = estilo;
+    public void setEstilo(String estilo) {
+        this.estilo = Estilo.valueOf(estilo);
     }
 
     public String getMarca() {
