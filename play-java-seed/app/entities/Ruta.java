@@ -3,19 +3,23 @@ package entities;
 public class Ruta {
     private int id;
     private String name;
-    private String tipo;
     private String recorrido;
     private int km;
+
     public enum EstadoAsfalto {BUENO, INTERMEDIO, MALO}
+
     private EstadoAsfalto estadoAsfalto;
+
     public enum Terreno {ASFALTO, HIBRIDO, TIERRA}
+
     private Terreno terreno;
     private int dificultad;
     private Valoracion valoracion;
     private int duracion;
-    public enum Trafico {ALTO, INTERMEDIO, BAJO}
-    private Trafico trafico;
 
+    public enum Trafico {ALTO, INTERMEDIO, BAJO}
+
+    private Trafico trafico;
 
 
     public int getId() {
@@ -34,14 +38,6 @@ public class Ruta {
         this.name = name;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public String getRecorrido() {
         return recorrido;
     }
@@ -58,20 +54,20 @@ public class Ruta {
         this.km = km;
     }
 
-    public EstadoAsfalto getEstadoAsfalto() {
-        return estadoAsfalto;
+    public String getEstadoAsfalto() {
+        return estadoAsfalto.toString();
     }
 
-    public void setEstadoAsfalto(EstadoAsfalto estadoAsfalto) {
-        this.estadoAsfalto = estadoAsfalto;
+    public void setEstadoAsfalto(String estadoAsfalto) {
+        this.estadoAsfalto = EstadoAsfalto.valueOf(estadoAsfalto);
     }
 
-    public Terreno getTerreno() {
-        return terreno;
+    public String getTerreno() {
+        return terreno.toString();
     }
 
-    public void setTerreno(Terreno terreno) {
-        this.terreno = terreno;
+    public void setTerreno(String terreno) {
+        this.terreno = Terreno.valueOf(terreno);
     }
 
     public int getDificultad() {
@@ -98,6 +94,15 @@ public class Ruta {
         this.duracion = duracion;
     }
 
+    public String getTrafico() {
+        return trafico.toString();
+    }
+
+    public void setTrafico(String trafico) {
+        this.trafico = Trafico.valueOf(trafico);
+    }
+}
+    /*
     @Override
     public String toString() {
         return "Employee{" +
@@ -108,3 +113,4 @@ public class Ruta {
                 '}';
     }
 }
+*/

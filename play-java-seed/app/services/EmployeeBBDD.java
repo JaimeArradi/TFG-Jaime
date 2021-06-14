@@ -56,14 +56,11 @@ public class EmployeeBBDD {
         return  valor;
     }
 
-   // public void addEmployee(String name,String department,  String pass, int salary ) throws SQLException, ClassNotFoundException {
     public Employee addEmployee(Employee employee) throws SQLException, ClassNotFoundException {
         if (conector() == true) {
 
             int id = employee.getId();
-            //employee.setId(id);
             String name= employee.getName();
-            //employee.setName(name);
             String department= employee.getDepartment();
             int salary = employee.getSalary();
 

@@ -13,6 +13,11 @@ GET     /moto/:id              controllers.MotoController.retrieve(id:Int)
 POST    /moto                  controllers.MotoController.create(request:Request)
 #PATCH   /moto/:id              controllers.MotoController.update(request:Request, id:Int)
 DELETE  /moto/:id              controllers.MotoController.delete(id:Int)
+GET     /ruta                  controllers.RutaController.listRutas()
+GET     /ruta/:id              controllers.RutaController.retrieve(id:Int)
+POST    /ruta                  controllers.RutaController.create(request:Request)
+#PATCH   /ruta/:id              controllers.RutaController.update(request:Request, id:Int)
+DELETE  /ruta/:id              controllers.RutaController.delete(id:Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
