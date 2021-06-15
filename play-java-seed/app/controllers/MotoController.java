@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Moto;
+import entities.MotoShort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import play.libs.Json;
@@ -42,7 +43,7 @@ public class MotoController extends Controller {
     }
 
     public Result listMotos() {
-        ArrayList<Moto> result = MotoBBDD.getInstance().getAllMotos();
+        ArrayList<MotoShort> result = MotoBBDD.getInstance().getAllMotos();
         logger.debug("In MotoController.listMotos(), result is: {}",result.toString());
         ObjectMapper mapper = new ObjectMapper();
 
@@ -61,15 +62,14 @@ public class MotoController extends Controller {
 /*
     public Result update(Http.Request request, int id) throws SQLException, ClassNotFoundException {
 
-        logger.debug("In EmployeeController.update(), update employee with id: {}",id);
-        if (EmployeeBBDD.getInstance().getEmployee(id) == null) {
-            return notFound(ApplicationUtil.createResponse("Employee with id:" + id + " not found", false));
+        logger.debug("In MotoController.update(), update moto with id: {}",id);
+        if (MotoBBDD.getInstance().getMoto(id) == null) {
+            return notFound(ApplicationUtil.createResponse("Moto with id:" + id + " not found", false));
         }
-        JsonNode jsonObjects = Json.toJson(EmployeeBBDD.getInstance().getEmployee(id));
-        Employee employee = EmployeeBBDD.getInstance().updateEmployee(Json.fromJson(jsonObjects, Employee.class));
-        JsonNode jsonObject = Json.toJson(employee);
-        logger.debug("In EmployeeController.update(), employee is: {}",employee);
+        JsonNode jsonObjects = Json.toJson(MotoBBDD.getInstance().getMoto(id));
+        Moto moto = MotoBBDD.getInstance().updateMoto(Json.fromJson(jsonObjects, Moto.class));
+        JsonNode jsonObject = Json.toJson(moto);
+        logger.debug("In MotoController.update(), moto is: {}",moto);
         return created(ApplicationUtil.createResponse(jsonObjects, true));
-    }
-    */
+    }*/
 }

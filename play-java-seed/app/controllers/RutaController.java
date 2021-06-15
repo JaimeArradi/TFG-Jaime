@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Ruta;
+import entities.RutaShort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import play.libs.Json;
@@ -42,7 +43,7 @@ public class RutaController extends Controller {
     }
 
     public Result listRutas() {
-        ArrayList<Ruta> result = RutaBBDD.getInstance().getAllRutas();
+        ArrayList<RutaShort> result = RutaBBDD.getInstance().getAllRutas();
         logger.debug("In RutaController.listRutas(), result is: {}",result.toString());
         ObjectMapper mapper = new ObjectMapper();
 

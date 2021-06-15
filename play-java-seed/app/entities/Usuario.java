@@ -4,17 +4,21 @@ public class Usuario {
     private int id;
     private String name;
     private int edad;
-    private enum Sexo {HOMBRE, MUJER}
     private Sexo sexo;
     private String bio;
-    private Ruta.Terreno terreno;
-    public enum Carne {A1, A2, A}
+    private Terreno terreno;
     private Carne carne;
     private int nivel;
-    //private int valoracion; quiza en un futuro valoraciones a usuario, no solo a ruta
-    private Moto moto;
+    private Moto moto; //motoshort para coger el id y uri para q el user elija su moto en la BBDD
     private Boolean intercomunicador;
 
+    //atributos de la moto del usuario
+    private Estilo estilo;
+    private String marca;
+    private String modelo;
+    private int potencia;
+
+    //private int valoracion; quiza en un futuro valoraciones a usuario, no solo a ruta
 
 
     public int getId() {
@@ -62,7 +66,7 @@ public class Usuario {
     }
 
     public void setTerreno(String terreno) {
-        this.terreno = Ruta.Terreno.valueOf(terreno);
+        this.terreno = Terreno.valueOf(terreno);
     }
 
     public int getNivel() {
@@ -72,16 +76,6 @@ public class Usuario {
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
-
-    /*
-    public int getValoracion() {
-        return valoracion;
-    }
-
-    public void setValoracion(int valoracion) {
-        this.valoracion = valoracion;
-    }
-    */
 
     public String getCarne() {
         return carne.toString();
@@ -106,6 +100,47 @@ public class Usuario {
     public void setIntercomunicador(Boolean intercomunicador) {
         this.intercomunicador = intercomunicador;
     }
+
+    //metodos de moto
+    public String getEstilo() { return estilo.toString(); } //Por que no vale esto: Estilo.valueOf(estilo)
+
+    public void setEstilo(String estilo) {
+        this.estilo = Estilo.valueOf(estilo);
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public int getPotencia() {
+        return potencia;
+    }
+
+    public void setPotencia(int potencia) {
+        this.potencia = potencia;
+    }
+
+     /*
+    public int getValoracion() {
+        return valoracion;
+    }
+
+    public void setValoracion(int valoracion) {
+        this.valoracion = valoracion;
+    }
+    */
 
     @Override
     public String toString() {

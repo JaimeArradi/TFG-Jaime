@@ -3,11 +3,6 @@
 # ~~~~
 
 # APIs in EmployeeController
-GET     /employee              controllers.EmployeeController.listEmployees()
-GET     /employee/:id          controllers.EmployeeController.retrieve(id:Int)
-POST    /employee              controllers.EmployeeController.create(request:Request)
-PATCH   /employee/:id          controllers.EmployeeController.update(request:Request, id:Int)
-DELETE  /employee/:id          controllers.EmployeeController.delete(id:Int)
 GET     /moto                  controllers.MotoController.listMotos()
 GET     /moto/:id              controllers.MotoController.retrieve(id:Int)
 POST    /moto                  controllers.MotoController.create(request:Request)

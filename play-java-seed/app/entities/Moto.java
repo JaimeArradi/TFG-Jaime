@@ -2,7 +2,6 @@ package entities;
 
 public class Moto {
     private int id;
-    public enum Estilo {TRAIL, R, CUSTOM, NAKED}
     private Estilo estilo;
     private String marca;
     private String modelo;

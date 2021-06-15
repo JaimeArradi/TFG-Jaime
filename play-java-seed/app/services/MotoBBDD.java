@@ -114,23 +114,19 @@ public class MotoBBDD {
         return moto;
     }
 
-    public ArrayList<Moto> getAllMotos() {
-        ArrayList<Moto> motoLista = new ArrayList();
+    public ArrayList<MotoShort> getAllMotos() {
+        ArrayList<MotoShort> motoLista = new ArrayList();
         try {
-            if(conector()==true){
+            if(conector()){
                 String queryBBDD = "select * from moto;";
                 int i=0;
                 try {
                     rS = createStatement.executeQuery(queryBBDD);
 
                     while (rS.next()) {
-                        Moto moto = new Moto();
+                        MotoShort moto = new MotoShort();
                         moto.setId(rS.getInt("idMoto"));
-                        moto.setEstilo(rS.getString("estilo"));
-                        moto.setMarca(rS.getString("marca"));
-                        moto.setModelo(rS.getString("modelo"));
-                        moto.setPotencia(rS.getInt("potencia"));
-                        System.out.println("xxxxxxxx"+ moto.getModelo());
+                        moto.setUri(rS.getString("uri"));
                         motoLista.add(moto);
 
                     }
@@ -157,7 +153,8 @@ public class MotoBBDD {
         return motoLista;
 
     }
-    /*public Moto updateMoto(Moto moto ) throws SQLException, ClassNotFoundException {
+    /*
+    public Moto updateMoto(Moto moto ) throws SQLException, ClassNotFoundException {
         try {
             if (conector() == true) {
                 int id = moto.getId();

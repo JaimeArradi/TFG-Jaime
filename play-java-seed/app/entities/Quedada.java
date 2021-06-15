@@ -6,8 +6,10 @@ public class Quedada {
     private String horaFinal;
     private String lugarPartida;
     private String lugarFinal;
+    private Usuario usuCreador;
     private Usuario[] usuarios;
-    private Usuario[] usuariosInv;
+    private Usuario[] usuariosInv; //lleva identificador de uri para poder añadir y eliminar -->
+    private Usuario[] usarioRecomen; //se recomienda y usuario decide si los invita--> pasar de recomendados a invitados
     private Ruta ruta;
     /*public enum Tipo {GASTRONOMICA, VELOCIDAD, PASEO, VISTAS}
     private Tipo tipo;*/

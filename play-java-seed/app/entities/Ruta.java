@@ -6,18 +6,12 @@ public class Ruta {
     private String recorrido;
     private int km;
 
-    public enum EstadoAsfalto {BUENO, INTERMEDIO, MALO}
-
     private EstadoAsfalto estadoAsfalto;
-
-    public enum Terreno {ASFALTO, HIBRIDO, TIERRA}
 
     private Terreno terreno;
     private int dificultad;
     private Valoracion valoracion;
     private int duracion;
-
-    public enum Trafico {ALTO, INTERMEDIO, BAJO}
 
     private Trafico trafico;
 
@@ -59,7 +53,7 @@ public class Ruta {
     }
 
     public void setEstadoAsfalto(String estadoAsfalto) {
-        this.estadoAsfalto = EstadoAsfalto.valueOf(estadoAsfalto);
+        this.estadoAsfalto = EstadoAsfalto.valueOf(estadoAsfalto.toUpperCase());
     }
 
     public String getTerreno() {

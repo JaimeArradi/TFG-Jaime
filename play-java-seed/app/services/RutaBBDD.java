@@ -1,6 +1,7 @@
 package services;
 
 import entities.Ruta;
+import entities.RutaShort;
 import play.db.Database;
 import play.db.Databases;
 
@@ -133,27 +134,19 @@ public class RutaBBDD {
         return ruta;
     }
 
-        public ArrayList<Ruta> getAllRutas() {
-            ArrayList<Ruta> rutaLista = new ArrayList();
+        public ArrayList<RutaShort> getAllRutas() {
+            ArrayList<RutaShort> rutaLista = new ArrayList();
             try {
-                if(conector()==true){
+                if(conector()){
                     String queryBBDD = "select * from ruta;";
                     int i=0;
                     try {
                         rS = createStatement.executeQuery(queryBBDD);
 
                         while (rS.next()) {
-                            Ruta ruta = new Ruta();
+                            RutaShort ruta = new RutaShort();
                             ruta.setId(rS.getInt("idRuta"));
-                            ruta.setName(rS.getString("name"));
-                            ruta.setRecorrido(rS.getString("recorrido"));
-                            ruta.setKm(rS.getInt("km"));
-                            ruta.setEstadoAsfalto(rS.getString("estadoAsfalto"));
-                            ruta.setTerreno(rS.getString("terreno"));
-                            ruta.setDificultad(rS.getInt("dificultad"));
-                            //valoracion
-                            ruta.setDuracion(rS.getInt("duracion"));
-                            ruta.setTrafico(rS.getString("trafico"));
+                            ruta.setUri(rS.getString("uri"));
                            rutaLista.add(ruta);
 
                         }
