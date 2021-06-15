@@ -11,7 +11,7 @@ public class Usuario {
     public enum Carne {A1, A2, A}
     private Carne carne;
     private int nivel;
-    private int valoracion;
+    //private int valoracion; quiza en un futuro valoraciones a usuario, no solo a ruta
     private Moto moto;
     private Boolean intercomunicador;
 
@@ -33,12 +33,12 @@ public class Usuario {
         this.name = name;
     }
 
-    public Sexo getSexo() {
-        return sexo;
+    public String getSexo() {
+        return sexo.toString();
     }
 
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
+    public void setSexo(String sexo) {
+        this.sexo = Sexo.valueOf(sexo);
     }
 
     public String getBio() {
@@ -57,12 +57,12 @@ public class Usuario {
         this.edad = edad;
     }
 
-    public Ruta.Terreno getTerreno() {
-        return terreno;
+    public String getTerreno() {
+        return terreno.toString();
     }
 
-    public void setTerreno(Ruta.Terreno terreno) {
-        this.terreno = terreno;
+    public void setTerreno(String terreno) {
+        this.terreno = Ruta.Terreno.valueOf(terreno);
     }
 
     public int getNivel() {
@@ -73,6 +73,7 @@ public class Usuario {
         this.nivel = nivel;
     }
 
+    /*
     public int getValoracion() {
         return valoracion;
     }
@@ -80,13 +81,14 @@ public class Usuario {
     public void setValoracion(int valoracion) {
         this.valoracion = valoracion;
     }
+    */
 
-    public Carne getCarne() {
-        return carne;
+    public String getCarne() {
+        return carne.toString();
     }
 
-    public void setCarne(Carne carne) {
-        this.carne = carne;
+    public void setCarne(String carne) {
+        this.carne = Carne.valueOf(carne);
     }
 
     public Moto getMoto() {
