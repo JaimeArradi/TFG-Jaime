@@ -126,7 +126,7 @@ public class MotoBBDD {
                     while (rS.next()) {
                         MotoShort moto = new MotoShort();
                         moto.setId(rS.getInt("idMoto"));
-                        moto.setUri(rS.getString("uri"));
+                        moto.setUri(rS.getString("uriMoto"));
                         motoLista.add(moto);
 
                     }

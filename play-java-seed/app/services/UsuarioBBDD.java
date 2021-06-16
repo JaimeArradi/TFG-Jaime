@@ -168,7 +168,7 @@ public class UsuarioBBDD {
                         while (rS.next()) {
                             UsuarioShort usuario = new UsuarioShort();
                             usuario.setId(rS.getInt("idUsuario"));
-                            usuario.setUri(rS.getString("uri"));
+                            usuario.setUri(rS.getString("uriUsuario"));
                             usuarioLista.add(usuario);//lista de usuario short
 
                         }
