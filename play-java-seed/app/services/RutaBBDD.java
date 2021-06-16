@@ -146,7 +146,7 @@ public class RutaBBDD {
                         while (rS.next()) {
                             RutaShort ruta = new RutaShort();
                             ruta.setId(rS.getInt("idRuta"));
-                            ruta.setUri(rS.getString("uri"));
+                            ruta.setUri(rS.getString("uriRuta"));
                            rutaLista.add(ruta);
 
                         }

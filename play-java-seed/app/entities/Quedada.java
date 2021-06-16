@@ -2,19 +2,22 @@ package entities;
 
 public class Quedada {
     private int id;
+    private String name;
     private String horaInicial;
     private String horaFinal;
     private String lugarPartida;
     private String lugarFinal;
-    private Usuario usuCreador;
-    private Usuario[] usuarios;
-    private Usuario[] usuariosInv; //lleva identificador de uri para poder añadir y eliminar -->
-    private Usuario[] usarioRecomen; //se recomienda y usuario decide si los invita--> pasar de recomendados a invitados
-    private Ruta ruta;
+    private Usuario creador; //usuario short
+    //clase añadir o remover
+    private Usuario[] usuarios; //usuario shorts igual q el de moto (participantes)
+    private Usuario[] usuariosInv; // (invitados)tb uso usuario short lleva identificador de uri para poder añadir y eliminar -->
+    private Usuario[] usarioRecomen; //(recomendados)se recomienda y usuario decide si los invita--> pasar de recomendados a invitados
+    private Ruta ruta; //ruta short
     /*public enum Tipo {GASTRONOMICA, VELOCIDAD, PASEO, VISTAS}
     private Tipo tipo;*/
     private String paradas; //coordenadas
     private int valoracion;
+    private String uriQuedada;
 
     public int getId() {
         return id;
@@ -72,15 +75,27 @@ public class Quedada {
     public String getParadas() {
         return paradas;
     }
-
     public void setParadas(String paradas) {
         this.paradas = paradas;
     }
 
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUriQuedada() {
+        return uriQuedada;
+    }
+    public void setUriQuedada(String uriQuedada) {
+        this.uriQuedada = uriQuedada;
+    }
+    
     public int getValoracion() {
         return valoracion;
     }
-
     public void setValoracion(int valoracion) {
         this.valoracion = valoracion;
     }

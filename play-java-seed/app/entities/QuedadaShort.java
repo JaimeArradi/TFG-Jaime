@@ -1,6 +1,6 @@
 package entities;
 
-public class QuedadasShort {
+public class QuedadaShort {
     private int id;
     private String uri;
 

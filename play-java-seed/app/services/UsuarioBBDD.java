@@ -1,6 +1,7 @@
 package services;
 
 import entities.Moto;
+import entities.MotoShort;
 import entities.Usuario;
 import entities.UsuarioShort;
 import play.db.Database;
@@ -94,15 +95,17 @@ public class UsuarioBBDD {
 
     public Usuario getUsuario(int id) {
         Usuario usuario = new Usuario();
-        Moto moto = new Moto();
+        System.out.println("1");
         try {
-            if(conector()==true){
+            if(conector()){
 
                 String queryBBDD = "select * from usuario INNER JOIN moto ON usuario.idMoto=moto.idMoto " +
                         "where usuario.idUsuario=" + id + ";";
+
                 int i=0;
                 try {
                     rS = createStatement.executeQuery(queryBBDD);
+                    System.out.println("2");
 
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -110,12 +113,14 @@ public class UsuarioBBDD {
                 }
                 if (rS == null){
                     usuario= null;
+                    System.out.println("3");
 
                 }
                 else{
 
                     try {
                         while (rS.next()) {
+                            System.out.println("4");
                             usuario.setId(rS.getInt("idUsuario"));
                             usuario.setName(rS.getString("name"));
                             usuario.setEdad(rS.getInt("edad"));
@@ -124,22 +129,22 @@ public class UsuarioBBDD {
                             usuario.setTerreno(rS.getString("terreno"));
                             usuario.setCarne(rS.getString("carne"));
                             usuario.setNivel(rS.getInt("nivel"));
-                            usuario.setEstilo(rS.getString("estilo"));
-                            usuario.setMarca(rS.getString("marca"));
-                            usuario.setModelo(rS.getString("modelo"));
-                            usuario.setPotencia(rS.getInt("potencia"));
                             usuario.setIntercomunicador(rS.getBoolean("intercom"));
+                            usuario.setMoto(new MotoShort(rS.getInt("idMoto"),rS.getString("uriMoto")));
 
                         } //while con toda la consulta y que saque los datos de moto, al objeto motoId le meto la id
                         //mejor hacer inner join y mostrar moto cojo solo id y uri
                     } catch (SQLException ex) {
                         Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                        ex.printStackTrace();
                     }
                     try {
                         i = 0;
                         con.close();
+                        System.out.println("5");
                     } catch (SQLException ex) {
                         Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                        ex.printStackTrace();
                     }
                 }
 
@@ -153,6 +158,7 @@ public class UsuarioBBDD {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("6");
         return usuario;
     }
 

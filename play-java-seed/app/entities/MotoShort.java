@@ -17,4 +17,10 @@ public class MotoShort {
     public void setUri(String uri) {
         this.uri = uri;
     }
+
+    public MotoShort (int id, String uri){
+        this.id=id;
+        this.uri=uri;
+    }
+    public MotoShort (){}
 }

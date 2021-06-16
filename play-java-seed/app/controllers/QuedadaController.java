@@ -2,21 +2,21 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import entities.Usuario;
-import entities.UsuarioShort;
+import entities.Quedada;
+import entities.QuedadaShort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
-import services.UsuarioBBDD;
+import services.QuedadaBBDD;
 import utils.ApplicationUtil;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class UsuarioController extends Controller {
+public class QuedadaController extends Controller {
 
     private static final Logger logger = LoggerFactory.getLogger("controller");
 
@@ -25,30 +25,26 @@ public class UsuarioController extends Controller {
         if (json == null) {
             return badRequest(ApplicationUtil.createResponse("Expecting JSON data", false));
         }
-        logger.debug("In UsuarioController.create(), input is: {}", json.toString());
-        Usuario usuario = UsuarioBBDD.getInstance().addUsuario(Json.fromJson(json, Usuario.class));
-        JsonNode jsonObject = Json.toJson(usuario);
+        logger.debug("In QuedadaController.create(), input is: {}", json.toString());
+        Quedada quedada = QuedadaBBDD.getInstance().addQuedada(Json.fromJson(json, Quedada.class));
+        JsonNode jsonObject = Json.toJson(quedada);
         return created(ApplicationUtil.createResponse(jsonObject, true));
     }
-    
- 
-    public Result retrieve(int id) {
-        logger.debug("In UsuarioController.retrieve(), retrieve usuario with idUsuario: {}",id);
-        Usuario usuario = UsuarioBBDD.getInstance().getUsuario(id);
-        if (usuario == null) {
-            return notFound(ApplicationUtil.createResponse("Usuario with idUsuario:" + id + " not found", false));
-        }
-        System.out.println("A");
-        JsonNode jsonObjects = Json.toJson(usuario);
 
-        //logger.debug("In UsuarioController.retrieve(), result is: {}",jsonObjects.toString());
-        System.out.println("B");
+
+    public Result retrieve(int id) {
+        logger.debug("In QuedadaController.retrieve(), retrieve quedada with idQuedada: {}",id);
+        if (QuedadaBBDD.getInstance().getQuedada(id) == null) {
+            return notFound(ApplicationUtil.createResponse("Quedada with idQuedada:" + id + " not found", false));
+        }
+        JsonNode jsonObjects = Json.toJson(QuedadaBBDD.getInstance().getQuedada(id));
+        logger.debug("In QuedadaController.retrieve(), result is: {}",jsonObjects.toString());
         return ok(ApplicationUtil.createResponse(jsonObjects, true));
     }
 
-    public Result listUsuarios() {
-        ArrayList<UsuarioShort> result = UsuarioBBDD.getInstance().getAllUsuarios();
-        logger.debug("In UsuarioController.listUsuarios(), result is: {}",result.toString());
+    public Result listQuedadas() {
+        ArrayList<QuedadaShort> result = QuedadaBBDD.getInstance().getAllQuedadas();
+        logger.debug("In QuedadaController.listQuedadas(), result is: {}",result.toString());
         ObjectMapper mapper = new ObjectMapper();
 
         JsonNode jsonData = mapper.convertValue(result, JsonNode.class);
@@ -57,11 +53,11 @@ public class UsuarioController extends Controller {
     }
 
     public Result delete(int id) throws SQLException, ClassNotFoundException {
-        logger.debug("In UsuarioController.retrieve(), delete usuario with idUsuario: {}",id);
-        if (!UsuarioBBDD.getInstance().deleteUsuario(id)) {
-            return notFound(ApplicationUtil.createResponse("Usuario with idUsuario:" + id + " not found", false));
+        logger.debug("In QuedadaController.retrieve(), delete quedada with idQuedada: {}",id);
+        if (!QuedadaBBDD.getInstance().deleteQuedada(id)) {
+            return notFound(ApplicationUtil.createResponse("Quedada with idQuedada:" + id + " not found", false));
         }
-        return ok(ApplicationUtil.createResponse("Usuario with idUsuario:" + id + " deleted", true));
+        return ok(ApplicationUtil.createResponse("Quedada with idQuedada:" + id + " deleted", true));
     }
 /*
     public Result update(Http.Request request, int id) throws SQLException, ClassNotFoundException {

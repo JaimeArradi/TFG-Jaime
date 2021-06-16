@@ -9,15 +9,8 @@ public class Usuario {
     private Terreno terreno;
     private Carne carne;
     private int nivel;
-    private Moto moto; //motoshort para coger el id y uri para q el user elija su moto en la BBDD
+    private MotoShort moto; //motoshort para coger el id y uri para q el user elija su moto en la BBDD
     private Boolean intercomunicador;
-
-    //atributos de la moto del usuario
-    private Estilo estilo;
-    private String marca;
-    private String modelo;
-    private int potencia;
-
     //private int valoracion; quiza en un futuro valoraciones a usuario, no solo a ruta
 
 
@@ -52,7 +45,7 @@ public class Usuario {
     public void setBio(String bio) {
         this.bio = bio;
     }
-
+    
     public int getEdad() {
         return edad;
     }
@@ -85,11 +78,11 @@ public class Usuario {
         this.carne = Carne.valueOf(carne);
     }
 
-    public Moto getMoto() {
+    public MotoShort getMoto() {
         return moto;
     }
 
-    public void setMoto(Moto m) {
+    public void setMoto(MotoShort m) {
         moto = m;
     }
 
@@ -99,37 +92,6 @@ public class Usuario {
 
     public void setIntercomunicador(Boolean intercomunicador) {
         this.intercomunicador = intercomunicador;
-    }
-
-    //metodos de moto
-    public String getEstilo() { return estilo.toString(); } //Por que no vale esto: Estilo.valueOf(estilo)
-
-    public void setEstilo(String estilo) {
-        this.estilo = Estilo.valueOf(estilo);
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public int getPotencia() {
-        return potencia;
-    }
-
-    public void setPotencia(int potencia) {
-        this.potencia = potencia;
     }
 
      /*
