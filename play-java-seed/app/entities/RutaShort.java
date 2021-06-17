@@ -17,4 +17,11 @@ public class RutaShort {
     public void setUri(String uri) {
         this.uri = uri;
     }
+
+    public RutaShort (int id, String uri){
+        this.id=id;
+        this.uri=uri;
+    }
+    public RutaShort (){}
+    
 }

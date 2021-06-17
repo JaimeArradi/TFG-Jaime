@@ -18,14 +18,11 @@ import java.util.ArrayList;
 
 public class UsuarioController extends Controller {
 
-    private static final Logger logger = LoggerFactory.getLogger("controller");
-
     public Result create(Http.Request request) throws SQLException, ClassNotFoundException {
         JsonNode json = request.body().asJson();
         if (json == null) {
             return badRequest(ApplicationUtil.createResponse("Expecting JSON data", false));
         }
-        logger.debug("In UsuarioController.create(), input is: {}", json.toString());
         Usuario usuario = UsuarioBBDD.getInstance().addUsuario(Json.fromJson(json, Usuario.class));
         JsonNode jsonObject = Json.toJson(usuario);
         return created(ApplicationUtil.createResponse(jsonObject, true));
@@ -33,22 +30,16 @@ public class UsuarioController extends Controller {
     
  
     public Result retrieve(int id) {
-        logger.debug("In UsuarioController.retrieve(), retrieve usuario with idUsuario: {}",id);
         Usuario usuario = UsuarioBBDD.getInstance().getUsuario(id);
         if (usuario == null) {
             return notFound(ApplicationUtil.createResponse("Usuario with idUsuario:" + id + " not found", false));
         }
-        System.out.println("A");
         JsonNode jsonObjects = Json.toJson(usuario);
-
-        //logger.debug("In UsuarioController.retrieve(), result is: {}",jsonObjects.toString());
-        System.out.println("B");
         return ok(ApplicationUtil.createResponse(jsonObjects, true));
     }
 
     public Result listUsuarios() {
         ArrayList<UsuarioShort> result = UsuarioBBDD.getInstance().getAllUsuarios();
-        logger.debug("In UsuarioController.listUsuarios(), result is: {}",result.toString());
         ObjectMapper mapper = new ObjectMapper();
 
         JsonNode jsonData = mapper.convertValue(result, JsonNode.class);
@@ -57,7 +48,6 @@ public class UsuarioController extends Controller {
     }
 
     public Result delete(int id) throws SQLException, ClassNotFoundException {
-        logger.debug("In UsuarioController.retrieve(), delete usuario with idUsuario: {}",id);
         if (!UsuarioBBDD.getInstance().deleteUsuario(id)) {
             return notFound(ApplicationUtil.createResponse("Usuario with idUsuario:" + id + " not found", false));
         }
@@ -66,14 +56,12 @@ public class UsuarioController extends Controller {
 /*
     public Result update(Http.Request request, int id) throws SQLException, ClassNotFoundException {
 
-        logger.debug("In EmployeeController.update(), update employee with id: {}",id);
         if (EmployeeBBDD.getInstance().getEmployee(id) == null) {
             return notFound(ApplicationUtil.createResponse("Employee with id:" + id + " not found", false));
         }
         JsonNode jsonObjects = Json.toJson(EmployeeBBDD.getInstance().getEmployee(id));
         Employee employee = EmployeeBBDD.getInstance().updateEmployee(Json.fromJson(jsonObjects, Employee.class));
         JsonNode jsonObject = Json.toJson(employee);
-        logger.debug("In EmployeeController.update(), employee is: {}",employee);
         return created(ApplicationUtil.createResponse(jsonObjects, true));
     }
     */

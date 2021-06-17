@@ -1,8 +1,6 @@
 package services;
 
-import entities.Moto;
-import entities.Quedada;
-import entities.QuedadaShort;
+import entities.*;
 import play.db.Database;
 import play.db.Databases;
 
@@ -90,8 +88,8 @@ public class QuedadaBBDD {
         try {
             if(conector()==true){
 
-                String queryBBDD = "select * from quedada " +
-                        "where idQuedada =" + id + ";";
+                String queryBBDD = "select * from quedada INNER JOIN usuario ON quedada.idUsuCreador=usuario.idUsuario" +
+                        " INNER JOIN ruta ON quedada.idRuta=ruta.idRuta where quedada.idQuedada=" + id + ";";
 
                 int i=0;
                 try {
@@ -110,14 +108,15 @@ public class QuedadaBBDD {
                     try {
                         while (rS.next()) {
                             quedada.setId(rS.getInt("idQuedada"));
-                            //quedada.setName(rS.getString("name"));
+                            quedada.setName(rS.getString("name"));
+                            quedada.setUsuarioCreador(new UsuarioShort(rS.getInt("idUsuario"),rS.getString("uriUsuario")));
                             quedada.setHoraInicial(rS.getString("horaInicial"));
                             quedada.setHoraFinal(rS.getString("horaFinal"));
                             quedada.setLugarPartida(rS.getString("lugarPartida"));
                             quedada.setLugarFinal(rS.getString("lugarFinal"));
-                            quedada.setValoracion(rS.getInt("valoracion"));
-                            //set id + uri ruta???
-                            //usuarios + usuariosInv + usuariosRecomen + usuCreador
+                            //quedada.setValoracion(rS.getInt("valoracion"));
+                            quedada.setRuta(new RutaShort(rS.getInt("idRuta"),rS.getString("uriRuta")));
+                            //usuarios + usuariosInv + usuariosRecomen
                             quedada.setParadas(rS.getString("paradas"));
                             quedada.setUriQuedada(rS.getString("uriQuedada"));
 
