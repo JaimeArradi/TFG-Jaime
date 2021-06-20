@@ -91,6 +91,7 @@ public class QuedadaBBDD {
                 String queryBBDD = "select * from quedada INNER JOIN usuario ON quedada.idUsuCreador=usuario.idUsuario" +
                         " INNER JOIN ruta ON quedada.idRuta=ruta.idRuta where quedada.idQuedada=" + id + ";";
 
+                //meto el usuario creador commo lo tengo metido o dentro de la base de datos quedadausuarios con rol creador??
                 int i=0;
                 try {
                     rS = createStatement.executeQuery(queryBBDD);
@@ -110,6 +111,7 @@ public class QuedadaBBDD {
                             quedada.setId(rS.getInt("idQuedada"));
                             quedada.setName(rS.getString("name"));
                             quedada.setUsuarioCreador(new UsuarioShort(rS.getInt("idUsuario"),rS.getString("uriUsuario")));
+                            //usuarios invitados y recomendados como los meto
                             quedada.setHoraInicial(rS.getString("horaInicial"));
                             quedada.setHoraFinal(rS.getString("horaFinal"));
                             quedada.setLugarPartida(rS.getString("lugarPartida"));
@@ -119,6 +121,18 @@ public class QuedadaBBDD {
                             //usuarios + usuariosInv + usuariosRecomen
                             quedada.setParadas(rS.getString("paradas"));
                             quedada.setUriQuedada(rS.getString("uriQuedada"));
+
+
+                            /*
+                            RECOMENDADOR
+                            quedada.getUsuarioCreador().getId()
+                            usuario usuario;
+                            Hacer query para sacar su nivel
+                            setNivel
+
+                            if nivel >= nivel - 1 && nivel<= nivel+1
+                            cogo esos ususarios y los meto en recomendados
+                             */
 
                         }
 

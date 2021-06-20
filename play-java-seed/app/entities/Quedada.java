@@ -8,13 +8,13 @@ public class Quedada {
     private String horaFinal;
     private String lugarPartida;
     private String lugarFinal;
-    //private Usuario[] usuarios; //usuario shorts igual q el de moto (participantes)
+    private Usuario[] usuarios; //usuario shorts igual q el de moto (participantes)
     //private Usuario[] usuariosInv; // (invitados)tb uso usuario short lleva identificador de uri para poder añadir y eliminar -->
     //private Usuario[] usarioRecomen; //(recomendados)se recomienda y usuario decide si los invita--> pasar de recomendados a invitados
-    private RutaShort ruta; //ruta short
+    private RutaShort ruta;
     private String paradas; //coordenadas
-    //private int valoracion;
     private String uriQuedada;
+    //private int valoracion;
     /*public enum Tipo {GASTRONOMICA, VELOCIDAD, PASEO, VISTAS}
     private Tipo tipo;*/
 

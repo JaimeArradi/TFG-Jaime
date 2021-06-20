@@ -2,6 +2,7 @@ package services;
 
 import entities.Ruta;
 import entities.RutaShort;
+import entities.ValoracionShort;
 import play.db.Database;
 import play.db.Databases;
 
@@ -84,7 +85,8 @@ public class RutaBBDD {
         try {
             if(conector()==true){
 
-                String queryBBDD = "select * from ruta where idRuta=" + id + ";";
+                String queryBBDD = "SELECT * FROM ruta INNER JOIN valoracion ON valoracion.idRuta = ruta.idRuta " +
+                        "WHERE ruta.idRuta =" + id + ";";
                 int i=0;
                 try {
                     rS = createStatement.executeQuery(queryBBDD);
@@ -106,7 +108,8 @@ public class RutaBBDD {
                             ruta.setEstadoAsfalto(rS.getString("estadoAsfalto"));
                             ruta.setTerreno(rS.getString("terreno"));
                             ruta.setDificultad(rS.getInt("dificultad"));
-                            //valoracion
+                            //ruta.setValoracion(new ValoracionShort(rS.getInt("idValoracion"),rS.getString("uriValoracion")));
+                            //mas de una valoracion, como las muestros??
                             ruta.setDuracion(rS.getInt("duracion"));
                             ruta.setTrafico(rS.getString("trafico"));
                         }

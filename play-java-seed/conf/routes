@@ -23,7 +23,12 @@ GET     /quedada/:id           controllers.QuedadaController.retrieve(id:Int)
 POST    /quedada               controllers.QuedadaController.create(request:Request)
 #PATCH   /quedada/:id          controllers.QuedadaController.update(request:Request, id:Int)
 DELETE  /quedada/:id           controllers.QuedadaController.delete(id:Int)
-#poner plurales
+GET     /valoraciones          controllers.ValoracionController.listValoraciones()
+GET     /valoracion/:id           controllers.ValoracionController.retrieve(id:Int)
+#POST    /valoracion               controllers.ValoracionController.create(request:Request)
+#PATCH   /valoracion/:id          controllers.ValoracionController.update(request:Request, id:Int)
+DELETE  /valoracion/:id           controllers.ValoracionController.delete(id:Int)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

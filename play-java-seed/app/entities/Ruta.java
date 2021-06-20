@@ -10,7 +10,7 @@ public class Ruta {
 
     private Terreno terreno;
     private int dificultad;
-    private Valoracion valoracion;
+    private ValoracionShort valoracion;
     private int duracion;
 
     private Trafico trafico;
@@ -72,11 +72,11 @@ public class Ruta {
         this.dificultad = dificultad;
     }
 
-    public Valoracion getValoracion() {
+    public ValoracionShort getValoracion() {
         return valoracion;
     }
 
-    public void setValoracion(Valoracion valoracion) {
+    public void setValoracion(ValoracionShort valoracion) {
         this.valoracion = valoracion;
     }
 

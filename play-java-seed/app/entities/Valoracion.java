@@ -2,10 +2,10 @@ package entities;
 
 public class Valoracion {
     private int id;
-    private Usuario usuario;
-    private Ruta ruta;
+    private UsuarioShort usuario;
+    private RutaShort ruta;
     private String comentario;
-    private int valoracion;
+    private int puntuacion;
 
     public int getId() {
         return id;
@@ -15,20 +15,20 @@ public class Valoracion {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Ruta getRuta() {
+    public RutaShort getRuta() {
         return ruta;
     }
 
-    public void setRuta(Ruta ruta) {
+    public void setRuta(RutaShort ruta) {
         this.ruta = ruta;
+    }
+
+    public UsuarioShort getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioShort usuario) {
+        this.usuario= usuario;
     }
 
     public String getComentario() {
@@ -39,12 +39,12 @@ public class Valoracion {
         this.comentario = comentario;
     }
 
-    public int getValoracion() {
-        return valoracion;
+    public int getPuntuacion() {
+        return puntuacion;
     }
 
-    public void setValoracion(int valoracion) {
-        this.valoracion = valoracion;
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class Valoracion {
         return "Employee{" +
                 "id=" + id +
                 ", name='" + ruta + '\'' +
-                ", salary=" + valoracion +
+                ", salary=" + puntuacion +
                 '}';
     }
 }

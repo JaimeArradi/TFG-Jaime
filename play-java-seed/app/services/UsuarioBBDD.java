@@ -105,15 +105,12 @@ public class UsuarioBBDD {
                 int i=0;
                 try {
                     rS = createStatement.executeQuery(queryBBDD);
-                    System.out.println("2");
-
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                     Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (rS == null){
                     usuario= null;
-                    System.out.println("3");
 
                 }
                 else{
@@ -141,7 +138,6 @@ public class UsuarioBBDD {
                     try {
                         i = 0;
                         con.close();
-                        System.out.println("5");
                     } catch (SQLException ex) {
                         Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
                         ex.printStackTrace();
@@ -158,7 +154,6 @@ public class UsuarioBBDD {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("6");
         return usuario;
     }
 
@@ -197,7 +192,7 @@ public class UsuarioBBDD {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("El tamano de la lista es" + usuarioLista.size());
+            //System.out.println("El tamano de la lista es" + usuarioLista.size());
             return usuarioLista;
 
         }
