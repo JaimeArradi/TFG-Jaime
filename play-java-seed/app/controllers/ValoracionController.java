@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class ValoracionController extends Controller {
 
-    /*
     public Result create(Http.Request request) throws SQLException, ClassNotFoundException {
         JsonNode json = request.body().asJson();
         if (json == null) {
@@ -26,7 +25,6 @@ public class ValoracionController extends Controller {
         JsonNode jsonObject = Json.toJson(valoracion);
         return created(ApplicationUtil.createResponse(jsonObject, true));
     }
-*/
 
     public Result retrieve(int id) {
         Valoracion valoracion = ValoracionBBDD.getInstance().getValoracion(id);

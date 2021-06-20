@@ -25,7 +25,7 @@ POST    /quedada               controllers.QuedadaController.create(request:Requ
 DELETE  /quedada/:id           controllers.QuedadaController.delete(id:Int)
 GET     /valoraciones          controllers.ValoracionController.listValoraciones()
 GET     /valoracion/:id           controllers.ValoracionController.retrieve(id:Int)
-#POST    /valoracion               controllers.ValoracionController.create(request:Request)
+POST    /valoracion               controllers.ValoracionController.create(request:Request)
 #PATCH   /valoracion/:id          controllers.ValoracionController.update(request:Request, id:Int)
 DELETE  /valoracion/:id           controllers.ValoracionController.delete(id:Int)
 

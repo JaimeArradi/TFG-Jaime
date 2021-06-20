@@ -55,20 +55,19 @@ public class ValoracionBBDD {
         return  valor;
     }
 
-    /*
     public Valoracion addValoracion(Valoracion valoracion) throws SQLException, ClassNotFoundException {
         if (conector()) {
             try {
 
                 int id = valoracion.getId();
-                String name = valoracion.getComentario();
+                String comentario = valoracion.getComentario();
                 int puntuacion = valoracion.getPuntuacion();
-                //meto id de usuario e id de ruta?
+                int idUsuario = valoracion.getIdUsuario();
+                int idRuta = valoracion.getIdRuta();
 
-                createStatement.executeUpdate("INSERT INTO valoracion (idValoracion,name,puntuacion,sexo,bio,terreno," +
-                        "carne,nivel,intercom,motoId) VALUES (" + id + ", '" + name + "', '" + puntuacion + "', '" + sexo + "'," +
-                        "'" + bio + "','" + terreno + "', '" + carne + "', '" + nivel + "','" + intercomunicador + "'" +
-                        ",'" + motoId + "')");
+                createStatement.executeUpdate("INSERT INTO valoracion (idValoracion,comentario,puntuacion," +
+                        "idUsuario,idRuta) VALUES (" + id + ", '" + comentario + "', '" + puntuacion + "', '" + idUsuario + "'," +
+                        "'" + idRuta + "')");
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -77,7 +76,6 @@ public class ValoracionBBDD {
         }
         return valoracion;
     }
-*/
 
     public Valoracion getValoracion(int id) {
         Valoracion valoracion = new Valoracion();
