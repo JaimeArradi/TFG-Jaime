@@ -59,7 +59,7 @@ public class UsuarioBBDD {
 
    // public void addUsuario(String name,String department,  String pass, int salary ) throws SQLException, ClassNotFoundException {
     public Usuario addUsuario(Usuario usuario) throws SQLException, ClassNotFoundException {
-        if (conector() == true) {
+        if (conector()) {
             try {
 
                 int id = usuario.getId();
@@ -70,19 +70,18 @@ public class UsuarioBBDD {
                 String terreno = usuario.getTerreno();
                 String carne = usuario.getCarne();
                 int nivel = usuario.getNivel();
-                int motoId = usuario.getMoto().getId();
-                //string moto...
                 int intercomunicador;
                 if (usuario.getIntercomunicador()) {
                     intercomunicador = 1;
                 } else {
                     intercomunicador = 0;
                 }
+                int idMoto = usuario.getIdMoto();
 
                 createStatement.executeUpdate("INSERT INTO usuario (idUsuario,name,edad,sexo,bio,terreno," +
-                        "carne,nivel,intercom,motoId) VALUES (" + id + ", '" + name + "', '" + edad + "', '" + sexo + "'," +
+                        "carne,nivel,intercom,idMoto) VALUES (" + id + ", '" + name + "', '" + edad + "', '" + sexo + "'," +
                         "'" + bio + "','" + terreno + "', '" + carne + "', '" + nivel + "','" + intercomunicador + "'" +
-                        ",'" + motoId + "')");
+                        ",'" + idMoto + "')");
             }catch (Exception e){
                 e.printStackTrace();
             }

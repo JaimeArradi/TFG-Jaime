@@ -11,6 +11,7 @@ public class Usuario {
     private int nivel;
     private MotoShort moto; //motoshort para coger el id y uri para q el user elija su moto en la BBDD
     private Boolean intercomunicador;
+    private int idMoto;
     //private int valoracion; quiza en un futuro valoraciones a usuario, no solo a ruta
 
 
@@ -92,6 +93,13 @@ public class Usuario {
 
     public void setIntercomunicador(Boolean intercomunicador) {
         this.intercomunicador = intercomunicador;
+    }
+
+    public int getIdMoto() {
+        return idMoto;
+    }
+    public void setIdMoto(int idMoto) {
+        this.idMoto = idMoto;
     }
 
      /*
