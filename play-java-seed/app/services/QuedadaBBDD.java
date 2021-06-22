@@ -110,7 +110,7 @@ public class QuedadaBBDD {
                         while (rS.next()) {
                             quedada.setId(rS.getInt("idQuedada"));
                             quedada.setName(rS.getString("name"));
-                            quedada.setUsuarioCreador(new UsuarioShort(rS.getInt("idUsuario"),rS.getString("uriUsuario")));
+                            quedada.setUsuarioCreador(new UsuarioShort(rS.getInt("idUsuCreador"),rS.getString("uriUsuario")));
                             //usuarios invitados y recomendados como los meto
                             quedada.setHoraInicial(rS.getString("horaInicial"));
                             quedada.setHoraFinal(rS.getString("horaFinal"));
@@ -123,6 +123,12 @@ public class QuedadaBBDD {
                             quedada.setUriQuedada(rS.getString("uriQuedada"));
 
 
+                            /*
+                            if(rS.getString("rol").equals("Recomen")){
+                                quedada.addRecomendado(new UsuarioShort(rS.getInt("quedadaUsuarios.idUsuario"),rS.getString("QuedadadaUsuarios.uriUsuario")))
+                            }
+                            Hago query para usuCreador y con una rs nueva hago otra query para coger los usuairos invitados y recomendados
+                            */
                             /*
                             RECOMENDADOR
                             quedada.getUsuarioCreador().getId()

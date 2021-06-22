@@ -8,9 +8,9 @@ public class Quedada {
     private String horaFinal;
     private String lugarPartida;
     private String lugarFinal;
-    private Usuario[] usuarios; //usuario shorts igual q el de moto (participantes)
-    //private Usuario[] usuariosInv; // (invitados)tb uso usuario short lleva identificador de uri para poder añadir y eliminar -->
-    //private Usuario[] usarioRecomen; //(recomendados)se recomienda y usuario decide si los invita--> pasar de recomendados a invitados
+    private UsuarioShort[] usuariosConfirmados; //usuario shorts igual q el de moto (participantes)
+    //private UsuarioShort[] usuariosInv; // (invitados)tb uso usuario short lleva identificador de uri para poder añadir y eliminar -->
+    //private Usuario[] usariosRecomen; //(recomendados)se recomienda y usuario decide si los invita--> pasar de recomendados a invitados
     private RutaShort ruta;
     private String paradas; //coordenadas
     private String uriQuedada;
@@ -81,6 +81,7 @@ public class Quedada {
             this.tipo = Tipo.valueOf(tipo);
         }
     */
+
     public String getParadas() {
         return paradas;
     }

@@ -108,7 +108,8 @@ public class RutaBBDD {
                             ruta.setEstadoAsfalto(rS.getString("estadoAsfalto"));
                             ruta.setTerreno(rS.getString("terreno"));
                             ruta.setDificultad(rS.getInt("dificultad"));
-                            //ruta.setValoracion(new ValoracionShort(rS.getInt("idValoracion"),rS.getString("uriValoracion")));
+                            ruta.addValoracion(new ValoracionShort(rS.getInt("idValoracion"),rS.getString("uriValoracion")));
+                            //ruta.add y voy añadiendo a valoracionShort
                             //mas de una valoracion, como las muestros??
                             ruta.setDuracion(rS.getInt("duracion"));
                             ruta.setTrafico(rS.getString("trafico"));

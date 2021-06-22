@@ -17,4 +17,6 @@ public class QuedadaShort {
     public void setUri(String uri) {
         this.uri = uri;
     }
+
+    public QuedadaShort(){}
 }

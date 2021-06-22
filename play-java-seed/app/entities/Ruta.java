@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class Ruta {
     private int id;
     private String name;
@@ -10,8 +12,9 @@ public class Ruta {
 
     private Terreno terreno;
     private int dificultad;
-    private ValoracionShort valoracion;
+    private ArrayList<ValoracionShort> valoraciones = new ArrayList();
     private int duracion;
+
 
     private Trafico trafico;
 
@@ -72,12 +75,16 @@ public class Ruta {
         this.dificultad = dificultad;
     }
 
-    public ValoracionShort getValoracion() {
-        return valoracion;
+    public void addValoracion(ValoracionShort v){
+        this.valoraciones.add(v);
     }
 
-    public void setValoracion(ValoracionShort valoracion) {
-        this.valoracion = valoracion;
+    public ArrayList<ValoracionShort> getValoraciones() {
+        return valoraciones;
+    }
+
+    public void setValoraciones(ArrayList<ValoracionShort> valoraciones) {
+        this.valoraciones = valoraciones;
     }
 
     public int getDuracion() {
