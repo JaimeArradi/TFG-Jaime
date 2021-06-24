@@ -74,7 +74,13 @@ public class RutaBBDD {
 
             createStatement.executeUpdate("INSERT INTO ruta (idRuta,name,recorrido,km,estadoAsfalto,terreno,dificultad,duracion" +
                     ",trafico) VALUES ("+id+", '" + name + "', '" + recorrido + "', '" + km + "', '" + estadoAsfalto + "'," +
-                    " '" + terreno +"', '" + dificultad + "', '" + duracion + "','" + trafico + "')");
+                    " '" + terreno +"', '" + dificultad + "', '" + duracion + "','" + trafico +"');",Statement.RETURN_GENERATED_KEYS);
+            ResultSet genUri = createStatement.getGeneratedKeys();
+            genUri.next();
+            id =genUri.getInt(1);
+            String patron = "/ruta/";
+            String uri = patron+id;
+            createStatement.executeUpdate("UPDATE  ruta set uriRuta ='" + uri + "' where idRuta = "+ id + ";");
             con.close();
 
         }

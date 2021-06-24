@@ -25,6 +25,7 @@ public class QuedadaBBDD {
     Database database = Databases.createFrom(driver, url);
     private Statement createStatement;
     private ResultSet rS;
+    private ResultSet rS1;
 
     protected boolean conector() throws SQLException, ClassNotFoundException {
         // Reseteamos a null la conexion a la bd
@@ -66,13 +67,21 @@ public class QuedadaBBDD {
                 String lugarPartida = quedada.getLugarPartida();
                 String lugarFinal = quedada.getLugarFinal();
                 String paradas = quedada.getParadas();
-                //set id + uri ruta???
+                int idRuta = quedada.getRuta().getId();
+                int usuCreador =quedada.getCreador().getId();
+                System.out.println(1);
                 //usuarios + usuariosInv + usuariosRecomen + usuCreador
-                int intercomunicador;
 
                 createStatement.executeUpdate("INSERT INTO quedada (idQuedada,name,horaInicial,horaFinal," +
-                        "lugarPartida,lugarFinal,paradas) VALUES (" + id + ", '" + name + "', '" + horaInicial + "'," +
-                        " '" + horaFinal + "','" + lugarPartida + "','" + lugarFinal + "', '" + paradas+"')");
+                        "lugarPartida,lugarFinal,paradas, idRuta, idUsuCreador) VALUES (" + id + ", '" + name + "', '" + horaInicial + "'," +
+                        " '" + horaFinal + "','" + lugarPartida + "','" + lugarFinal + "', '" + paradas+"', '" + idRuta+"', '" + usuCreador+"');",Statement.RETURN_GENERATED_KEYS);
+                ResultSet genUri = createStatement.getGeneratedKeys();
+                genUri.next();
+
+                id =genUri.getInt(1);
+                String patron = "/quedada/";
+                String uri = patron+id;
+                createStatement.executeUpdate("UPDATE  quedada set uriQuedada ='" + uri + "' where idQuedada = "+ id + ";");
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -90,6 +99,8 @@ public class QuedadaBBDD {
 
                 String queryBBDD = "select * from quedada INNER JOIN usuario ON quedada.idUsuCreador=usuario.idUsuario" +
                         " INNER JOIN ruta ON quedada.idRuta=ruta.idRuta where quedada.idQuedada=" + id + ";";
+                String queryBBDD1 = "SELECT usuario.uriUsuario, usuario.idUsuario, quedadausuarios.rol FROM quedada INNER JOIN quedadausuarios on quedadausuarios.idQuedada = quedada.idQuedada INNER JOIN ruta ON quedada.idRuta=ruta.idRuta INNER JOIN usuario ON usuario.idUsuario=quedadausuarios.idUsuario WHERE quedada.idQuedada=" + id + ";";
+
 
                 //meto el usuario creador commo lo tengo metido o dentro de la base de datos quedadausuarios con rol creador??
                 int i=0;
@@ -110,7 +121,7 @@ public class QuedadaBBDD {
                         while (rS.next()) {
                             quedada.setId(rS.getInt("idQuedada"));
                             quedada.setName(rS.getString("name"));
-                            quedada.setUsuarioCreador(new UsuarioShort(rS.getInt("idUsuCreador"),rS.getString("uriUsuario")));
+                            quedada.setCreador(new UsuarioShort(rS.getInt("idUsuCreador"),rS.getString("uriUsuario")));
                             //usuarios invitados y recomendados como los meto
                             quedada.setHoraInicial(rS.getString("horaInicial"));
                             quedada.setHoraFinal(rS.getString("horaFinal"));
@@ -141,15 +152,40 @@ public class QuedadaBBDD {
                              */
 
                         }
+                        rS1 = createStatement.executeQuery(queryBBDD1);
+
+                        while(rS1.next()){
+                            String rol = rS1.getString("rol");
+
+                            if(rol.equals("Conf")){
+                                UsuarioShort usuario = new UsuarioShort();
+                                usuario.setUri(rS1.getString("uriUsuario"));
+                                usuario.setId(rS1.getInt("idUsuario"));
+                                quedada.getUsuariosConfirmados().add(usuario);
+                            }else if(rol.equals("Inv")){
+                                UsuarioShort usuario = new UsuarioShort();
+                                usuario.setUri(rS1.getString("uriUsuario"));
+                                usuario.setId(rS1.getInt("idUsuario"));
+                                quedada.getUsuariosInvitados().add(usuario);
+
+                            }else{
+                                UsuarioShort usuario = new UsuarioShort();
+                                usuario.setUri(rS1.getString("uriUsuario"));
+                                usuario.setId(rS1.getInt("idUsuario"));
+                                quedada.getUsuariosRecomendados().add(usuario);
+                            }
+                        }
 
                     } catch (SQLException ex) {
                         Logger.getLogger(QuedadaBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                        ex.printStackTrace();
                     }
                     try {
                         i = 0;
                         con.close();
                     } catch (SQLException ex) {
                         Logger.getLogger(QuedadaBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                        ex.printStackTrace();
                     }
                 }
 

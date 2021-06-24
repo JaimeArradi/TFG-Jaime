@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class QuedadaController extends Controller {
 
     public Result create(Http.Request request) throws SQLException, ClassNotFoundException {
+        System.out.println(1);
         JsonNode json = request.body().asJson();
         if (json == null) {
             return badRequest(ApplicationUtil.createResponse("Expecting JSON data", false));

@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class Quedada {
     private int id;
     private String name;
@@ -8,7 +10,12 @@ public class Quedada {
     private String horaFinal;
     private String lugarPartida;
     private String lugarFinal;
-    private UsuarioShort[] usuariosConfirmados; //usuario shorts igual q el de moto (participantes)
+    private ArrayList<UsuarioShort> usuariosConfirmados= new ArrayList<>();
+    private ArrayList<UsuarioShort> usuariosInvitados= new ArrayList<>();
+    private ArrayList<UsuarioShort> usuariosRecomendados= new ArrayList<>();
+
+
+    //usuario shorts igual q el de moto (participantes)
     //private UsuarioShort[] usuariosInv; // (invitados)tb uso usuario short lleva identificador de uri para poder añadir y eliminar -->
     //private Usuario[] usariosRecomen; //(recomendados)se recomienda y usuario decide si los invita--> pasar de recomendados a invitados
     private RutaShort ruta;
@@ -66,13 +73,38 @@ public class Quedada {
         this.ruta = ruta;
     }
 
-    public UsuarioShort getUsuarioCreador() {
+    public UsuarioShort getCreador() {
         return creador;
     }
 
-    public void setUsuarioCreador(UsuarioShort creador) {
+    public void setCreador(UsuarioShort creador) {
         this.creador = creador;
     }
+
+    public ArrayList<UsuarioShort> getUsuariosConfirmados() {
+        return usuariosConfirmados;
+    }
+
+    public void setUsuariosConfirmados(ArrayList<UsuarioShort> usuariosConfirmados) {
+        this.usuariosConfirmados = usuariosConfirmados;
+    }
+
+    public ArrayList<UsuarioShort> getUsuariosInvitados() {
+        return usuariosInvitados;
+    }
+
+    public void setUsuariosInvitados(ArrayList<UsuarioShort> usuariosInvitados) {
+        this.usuariosInvitados = usuariosInvitados;
+    }
+
+    public ArrayList<UsuarioShort> getUsuariosRecomendados() {
+        return usuariosRecomendados;
+    }
+
+    public void setUsuariosRecomendados(ArrayList<UsuarioShort> usuariosRecomendados) {
+        this.usuariosRecomendados = usuariosRecomendados;
+    }
+
 
     /*
         public String getTipo() { return tipo.toString(); }

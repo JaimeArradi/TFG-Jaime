@@ -59,6 +59,7 @@ public class MotoBBDD {
         //Si la conexion NO fue exitosa mostramos un mensaje de error
         catch (ClassNotFoundException | SQLException e){
             System.out.println( e);
+            e.printStackTrace();
         }
         return  valor;
     }
@@ -66,7 +67,7 @@ public class MotoBBDD {
     public Moto getMoto(int id) {
         Moto moto = new Moto();
         try {
-            if(conector()==true){
+            if(conector()){
 
                 String queryBBDD = "select * from moto where idMoto=" + id + ";";
                 int i=0;
@@ -230,8 +231,16 @@ public class MotoBBDD {
             String modelo= moto.getModelo();
             int potencia = moto.getPotencia();
 
-            createStatement.executeUpdate("INSERT INTO moto (idMoto,estilo,marca,modelo,potencia) VALUES ("+id+", '" + estilo + "', '" + marca + "', '" + modelo + "', "+potencia+")");
+            createStatement.executeUpdate("INSERT INTO moto (idMoto,estilo,marca,modelo,potencia) VALUES ("+id+", " +
+                    "'" + estilo + "', '" + marca + "', '" + modelo + "', "+potencia+");",Statement.RETURN_GENERATED_KEYS);
+            ResultSet genUri = createStatement.getGeneratedKeys();
+            genUri.next();
+            id =genUri.getInt(1);
+            String patron = "/moto/";
+            String uri = patron+id;
+            createStatement.executeUpdate("UPDATE  moto set uriMoto ='" + uri + "' where idMoto = "+ id + ";");
             con.close();
+
 
         }
         return moto;

@@ -23,6 +23,8 @@ public class Usuario {
         this.id = id;
     }
 
+
+
     public String getName() {
         return name;
     }
@@ -94,13 +96,14 @@ public class Usuario {
     public void setIntercomunicador(Boolean intercomunicador) {
         this.intercomunicador = intercomunicador;
     }
+/*
 
     public int getIdMoto() {
         return idMoto;
     }
     public void setIdMoto(int idMoto) {
         this.idMoto = idMoto;
-    }
+    }*/
 
      /*
     public int getValoracion() {

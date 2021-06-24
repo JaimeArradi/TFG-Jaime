@@ -62,12 +62,18 @@ public class ValoracionBBDD {
                 int id = valoracion.getId();
                 String comentario = valoracion.getComentario();
                 int puntuacion = valoracion.getPuntuacion();
-                int idUsuario = valoracion.getIdUsuario();
-                int idRuta = valoracion.getIdRuta();
+                int idUsuario = valoracion.getUsuario().getId();
+                int idRuta = valoracion.getRuta().getId();
 
                 createStatement.executeUpdate("INSERT INTO valoracion (idValoracion,comentario,puntuacion," +
                         "idUsuario,idRuta) VALUES (" + id + ", '" + comentario + "', '" + puntuacion + "', '" + idUsuario + "'," +
-                        "'" + idRuta + "')");
+                        "'" + idRuta +"');",Statement.RETURN_GENERATED_KEYS);
+                ResultSet genUri = createStatement.getGeneratedKeys();
+                genUri.next();
+                id =genUri.getInt(1);
+                String patron = "/valoracion/";
+                String uri = patron+id;
+                createStatement.executeUpdate("UPDATE  valoracion set uriValoracion ='" + uri + "' where idValoracion = "+ id + ";");
             }catch (Exception e){
                 e.printStackTrace();
             }

@@ -2,9 +2,7 @@ package entities;
 
 public class Valoracion {
     private int id;
-    private int idUsuario;
     private UsuarioShort usuario;
-    private int idRuta;
     private RutaShort ruta;
     private String comentario;
     private int puntuacion;
@@ -49,19 +47,8 @@ public class Valoracion {
         this.puntuacion = puntuacion;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 
-    public int getIdRuta() {
-        return idRuta;
-    }
-    public void setIdRuta(int idRuta) {
-        this.idRuta = idRuta;
-    }
+
 
     @Override
     public String toString() {

@@ -76,12 +76,18 @@ public class UsuarioBBDD {
                 } else {
                     intercomunicador = 0;
                 }
-                int idMoto = usuario.getIdMoto();
+                int idMoto = usuario.getMoto().getId();
 
                 createStatement.executeUpdate("INSERT INTO usuario (idUsuario,name,edad,sexo,bio,terreno," +
                         "carne,nivel,intercom,idMoto) VALUES (" + id + ", '" + name + "', '" + edad + "', '" + sexo + "'," +
                         "'" + bio + "','" + terreno + "', '" + carne + "', '" + nivel + "','" + intercomunicador + "'" +
-                        ",'" + idMoto + "')");
+                        ",'" + idMoto +"');",Statement.RETURN_GENERATED_KEYS);
+                ResultSet genUri = createStatement.getGeneratedKeys();
+                genUri.next();
+                id =genUri.getInt(1);
+                String patron = "/usuario/";
+                String uri = patron+id;
+                createStatement.executeUpdate("UPDATE  usuario set uriUsuario ='" + uri + "' where idUsuario = "+ id + ";");
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -236,9 +242,9 @@ public class UsuarioBBDD {
     }
         return usuario;
     }
+*/
 
 
-         */
     public boolean deleteUsuario(int id) throws SQLException, ClassNotFoundException {
         boolean valor= false;
         try {

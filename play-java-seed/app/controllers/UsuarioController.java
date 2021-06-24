@@ -31,12 +31,25 @@ public class UsuarioController extends Controller {
  
     public Result retrieve(int id) {
         Usuario usuario = UsuarioBBDD.getInstance().getUsuario(id);
+
         if (usuario == null) {
             return notFound(ApplicationUtil.createResponse("Usuario with idUsuario:" + id + " not found", false));
         }
         JsonNode jsonObjects = Json.toJson(usuario);
         return ok(ApplicationUtil.createResponse(jsonObjects, true));
     }
+
+    /*
+    public Result retrieve(int idUsuario, int idValoracion) {
+        Usuario usuario = UsuarioBBDD.getInstance().getUsuario(id);
+
+        if (usuario == null) {
+            return notFound(ApplicationUtil.createResponse("Usuario with idUsuario:" + id + " not found", false));
+        }
+        JsonNode jsonObjects = Json.toJson(usuario);
+        return ok(ApplicationUtil.createResponse(jsonObjects, true));
+    }
+    */
 
     public Result listUsuarios() {
         ArrayList<UsuarioShort> result = UsuarioBBDD.getInstance().getAllUsuarios();
