@@ -57,7 +57,7 @@ public class QuedadaBBDD {
 
    // public void addQuedada(String name,String department,  String pass, int salary ) throws SQLException, ClassNotFoundException {
     public Quedada addQuedada(Quedada quedada) throws SQLException, ClassNotFoundException {
-        if (conector() == true) {
+        if (conector()) {
             try {
 
                 int id = quedada.getId();
@@ -69,12 +69,13 @@ public class QuedadaBBDD {
                 String paradas = quedada.getParadas();
                 int idRuta = quedada.getRuta().getId();
                 int usuCreador =quedada.getCreador().getId();
-                System.out.println(1);
+                String tipo = quedada.getTipo();
                 //usuarios + usuariosInv + usuariosRecomen + usuCreador
 
                 createStatement.executeUpdate("INSERT INTO quedada (idQuedada,name,horaInicial,horaFinal," +
-                        "lugarPartida,lugarFinal,paradas, idRuta, idUsuCreador) VALUES (" + id + ", '" + name + "', '" + horaInicial + "'," +
-                        " '" + horaFinal + "','" + lugarPartida + "','" + lugarFinal + "', '" + paradas+"', '" + idRuta+"', '" + usuCreador+"');",Statement.RETURN_GENERATED_KEYS);
+                        "lugarPartida,lugarFinal,paradas, idRuta, idUsuCreador, tipo) VALUES (" + id + ", '" + name + "', '" + horaInicial + "'," +
+                        " '" + horaFinal + "','" + lugarPartida + "','" + lugarFinal + "', '" + paradas+"'," +
+                        " '" + idRuta+"', '" + usuCreador+"', '" + tipo+"');",Statement.RETURN_GENERATED_KEYS);
                 ResultSet genUri = createStatement.getGeneratedKeys();
                 genUri.next();
 
@@ -95,7 +96,7 @@ public class QuedadaBBDD {
     public Quedada getQuedada(int id) {
         Quedada quedada = new Quedada();
         try {
-            if(conector()==true){
+            if(conector()){
 
                 String queryBBDD = "select * from quedada INNER JOIN usuario ON quedada.idUsuCreador=usuario.idUsuario" +
                         " INNER JOIN ruta ON quedada.idRuta=ruta.idRuta where quedada.idQuedada=" + id + ";";
@@ -129,9 +130,11 @@ public class QuedadaBBDD {
                             quedada.setLugarFinal(rS.getString("lugarFinal"));
                             //quedada.setValoracion(rS.getInt("valoracion"));
                             quedada.setRuta(new RutaShort(rS.getInt("idRuta"),rS.getString("uriRuta")));
+                            quedada.setTipo(rS.getString("tipo"));
                             //usuarios + usuariosInv + usuariosRecomen
                             quedada.setParadas(rS.getString("paradas"));
                             quedada.setUriQuedada(rS.getString("uriQuedada"));
+
 
 
                             /*

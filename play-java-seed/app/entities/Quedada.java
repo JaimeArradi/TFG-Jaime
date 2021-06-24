@@ -21,9 +21,7 @@ public class Quedada {
     private RutaShort ruta;
     private String paradas; //coordenadas
     private String uriQuedada;
-    //private int valoracion;
-    /*public enum Tipo {GASTRONOMICA, VELOCIDAD, PASEO, VISTAS}
-    private Tipo tipo;*/
+    private Tipo tipo;
 
     public int getId() {
         return id;
@@ -105,14 +103,12 @@ public class Quedada {
         this.usuariosRecomendados = usuariosRecomendados;
     }
 
-
-    /*
         public String getTipo() { return tipo.toString(); }
 
         public void setTipo(String tipo) {
             this.tipo = Tipo.valueOf(tipo);
         }
-    */
+
 
     public String getParadas() {
         return paradas;
