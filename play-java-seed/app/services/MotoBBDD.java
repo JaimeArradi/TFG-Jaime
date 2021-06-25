@@ -225,17 +225,15 @@ public class MotoBBDD {
     public Moto addMoto(Moto moto) throws SQLException, ClassNotFoundException {
         if (conector() == true) {
 
-            int id = moto.getId();
             String estilo = moto.getEstilo();
             String marca= moto.getMarca();
             String modelo= moto.getModelo();
             int potencia = moto.getPotencia();
 
-            createStatement.executeUpdate("INSERT INTO moto (idMoto,estilo,marca,modelo,potencia) VALUES ("+id+", " +
-                    "'" + estilo + "', '" + marca + "', '" + modelo + "', "+potencia+");",Statement.RETURN_GENERATED_KEYS);
+            createStatement.executeUpdate("INSERT INTO moto (estilo, marca, modelo, potencia) VALUES ('" + estilo + "', '" + marca + "', '" + modelo + "', "+potencia+");",Statement.RETURN_GENERATED_KEYS);
             ResultSet genUri = createStatement.getGeneratedKeys();
             genUri.next();
-            id =genUri.getInt(1);
+            int id =genUri.getInt(1);
             String patron = "/moto/";
             String uri = patron+id;
             createStatement.executeUpdate("UPDATE  moto set uriMoto ='" + uri + "' where idMoto = "+ id + ";");

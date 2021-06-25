@@ -64,7 +64,7 @@ public class UsuarioController extends Controller {
         if (!UsuarioBBDD.getInstance().deleteUsuario(id)) {
             return notFound(ApplicationUtil.createResponse("Usuario with idUsuario:" + id + " not found", false));
         }
-        return ok(ApplicationUtil.createResponse("Usuario with idUsuario:" + id + " deleted", true));
+        return ok(ApplicationUtil.createResponse("Usuario with idUsuario: " + id + " deleted", true));
     }
 /*
     public Result update(Http.Request request, int id) throws SQLException, ClassNotFoundException {

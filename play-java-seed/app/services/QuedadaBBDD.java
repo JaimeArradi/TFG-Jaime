@@ -73,7 +73,8 @@ public class QuedadaBBDD {
                 //usuarios + usuariosInv + usuariosRecomen + usuCreador
 
                 createStatement.executeUpdate("INSERT INTO quedada (idQuedada,name,horaInicial,horaFinal," +
-                        "lugarPartida,lugarFinal,paradas, idRuta, idUsuCreador, tipo) VALUES (" + id + ", '" + name + "', '" + horaInicial + "'," +
+                        "lugarPartida,lugarFinal,paradas, idRuta, idUsuCreador, tipo) VALUES (" + id + "," +
+                        " '" + name + "', '" + horaInicial + "'," +
                         " '" + horaFinal + "','" + lugarPartida + "','" + lugarFinal + "', '" + paradas+"'," +
                         " '" + idRuta+"', '" + usuCreador+"', '" + tipo+"');",Statement.RETURN_GENERATED_KEYS);
                 ResultSet genUri = createStatement.getGeneratedKeys();

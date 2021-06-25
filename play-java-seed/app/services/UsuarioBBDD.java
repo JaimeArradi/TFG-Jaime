@@ -62,7 +62,6 @@ public class UsuarioBBDD {
         if (conector()) {
             try {
 
-                int id = usuario.getId();
                 String name = usuario.getName();
                 int edad = usuario.getEdad();
                 String sexo = usuario.getSexo();
@@ -78,16 +77,15 @@ public class UsuarioBBDD {
                 }
                 int idMoto = usuario.getMoto().getId();
 
-                createStatement.executeUpdate("INSERT INTO usuario (idUsuario,name,edad,sexo,bio,terreno," +
-                        "carne,nivel,intercom,idMoto) VALUES (" + id + ", '" + name + "', '" + edad + "', '" + sexo + "'," +
+                createStatement.executeUpdate("INSERT INTO usuario (name, edad, sexo, bio, terreno, carne, nivel, intercom, idMoto) VALUES ('" + name + "', '" + edad + "', '" + sexo + "'," +
                         "'" + bio + "','" + terreno + "', '" + carne + "', '" + nivel + "','" + intercomunicador + "'" +
                         ",'" + idMoto +"');",Statement.RETURN_GENERATED_KEYS);
                 ResultSet genUri = createStatement.getGeneratedKeys();
                 genUri.next();
-                id =genUri.getInt(1);
+                int id =genUri.getInt(1);
                 String patron = "/usuario/";
                 String uri = patron+id;
-                createStatement.executeUpdate("UPDATE  usuario set uriUsuario ='" + uri + "' where idUsuario = "+ id + ";");
+                createStatement.executeUpdate("UPDATE usuario set uriUsuario ='" + uri + "' where idUsuario = "+ id + ";");
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -100,7 +98,6 @@ public class UsuarioBBDD {
 
     public Usuario getUsuario(int id) {
         Usuario usuario = new Usuario();
-        System.out.println("1");
         try {
             if(conector()){
 
@@ -112,14 +109,11 @@ public class UsuarioBBDD {
                     rS = createStatement.executeQuery(queryBBDD);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
-                    Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (rS == null){
                     usuario= null;
-
                 }
                 else{
-
                     try {
                         while (rS.next()) {
                             System.out.println("4");
@@ -134,30 +128,24 @@ public class UsuarioBBDD {
                             usuario.setIntercomunicador(rS.getBoolean("intercom"));
                             usuario.setMoto(new MotoShort(rS.getInt("idMoto"),rS.getString("uriMoto")));
 
-                        } //while con toda la consulta y que saque los datos de moto, al objeto motoId le meto la id
-                        //mejor hacer inner join y mostrar moto cojo solo id y uri
+                        }
                     } catch (SQLException ex) {
-                        Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
                         ex.printStackTrace();
                     }
                     try {
-                        i = 0;
                         con.close();
                     } catch (SQLException ex) {
-                        Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
                         ex.printStackTrace();
                     }
                 }
-
             }
             else{
                     usuario=null;
-
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return usuario;
     }
@@ -179,27 +167,24 @@ public class UsuarioBBDD {
 
                         }
                     } catch (SQLException ex) {
-                        Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                        ex.printStackTrace();
                     }
                     try {
                         i=0;
                         con.close();
                     } catch (SQLException ex) {
-                        Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                        ex.printStackTrace();
                     }
-
                 }
                 else{
                     return usuarioLista;
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
-            //System.out.println("El tamano de la lista es" + usuarioLista.size());
             return usuarioLista;
-
         }
 
         /*
@@ -248,7 +233,7 @@ public class UsuarioBBDD {
     public boolean deleteUsuario(int id) throws SQLException, ClassNotFoundException {
         boolean valor= false;
         try {
-            if (conector() == true) {
+            if (conector()) {
 
                 String queryBBDD = "delete from usuario where idUsuario="+id+";";
 
@@ -257,23 +242,20 @@ public class UsuarioBBDD {
                     valor = true;
                     return valor;
                 } catch (SQLException ex) {
-                    Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
-
                 try {
-
                     con.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             }
             else{
-
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return valor;
     }
