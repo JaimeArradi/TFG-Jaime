@@ -1,11 +1,8 @@
 package entities;
 
-public class Invitacion {
+public class InvitacionShort {
     private int idInvitacion;
     private String uriInvitacion;
-
-    private UsuarioShort usuario;
-    private QuedadaShort quedada;
 
     public int getIdInvitacion() {
         return idInvitacion;
@@ -23,21 +20,6 @@ public class Invitacion {
         this.uriInvitacion = uriInvitacion;
     }
 
-    public UsuarioShort getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioShort usuario) {
-        this.usuario = usuario;
-    }
-
-    public QuedadaShort getQuedada() {
-        return quedada;
-    }
-
-    public void setQuedada(QuedadaShort quedada) {
-        this.quedada = quedada;
-    }
-
+    public InvitacionShort(){}
 }
 

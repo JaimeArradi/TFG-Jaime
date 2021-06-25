@@ -2,6 +2,7 @@ package services;
 
 import entities.Ruta;
 import entities.RutaShort;
+import entities.UsuarioShort;
 import entities.ValoracionShort;
 import play.db.Database;
 import play.db.Databases;
@@ -119,6 +120,10 @@ public class RutaBBDD {
                             //mas de una valoracion, como las muestros??
                             ruta.setDuracion(rS.getInt("duracion"));
                             ruta.setTrafico(rS.getString("trafico"));
+                            ValoracionShort valoracion = new ValoracionShort();
+                            valoracion.setUri(rS.getString("uriValoracion"));
+                            valoracion.setId(rS.getInt("idValoracion"));
+                            ruta.getValoraciones().add(valoracion);
                         }
                     } catch (SQLException ex) {
                         Logger.getLogger(RutaBBDD.class.getName()).log(Level.SEVERE, null, ex);
@@ -251,9 +256,9 @@ public class RutaBBDD {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(RutaBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RutaBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return valor;
     }

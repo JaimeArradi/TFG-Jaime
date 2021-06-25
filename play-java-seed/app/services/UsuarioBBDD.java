@@ -1,9 +1,6 @@
 package services;
 
-import entities.Moto;
-import entities.MotoShort;
-import entities.Usuario;
-import entities.UsuarioShort;
+import entities.*;
 import play.db.Database;
 import play.db.Databases;
 
@@ -101,9 +98,7 @@ public class UsuarioBBDD {
         try {
             if(conector()){
 
-                String queryBBDD = "select * from usuario INNER JOIN moto ON usuario.idMoto=moto.idMoto " +
-                        "where usuario.idUsuario=" + id + ";";
-
+                String queryBBDD = "select * from usuario INNER JOIN moto ON usuario.idMoto=moto.idMoto INNER JOIN invitacionusuarios ON invitacionusuarios.idUsuario = usuario.idUsuario INNER JOIN invitacion ON invitacion.idInvitacion = invitacionusuarios.idInvitacion WHERE usuario.idUsuario=" + id + ";";
                 int i=0;
                 try {
                     rS = createStatement.executeQuery(queryBBDD);
@@ -116,7 +111,6 @@ public class UsuarioBBDD {
                 else{
                     try {
                         while (rS.next()) {
-                            System.out.println("4");
                             usuario.setId(rS.getInt("idUsuario"));
                             usuario.setName(rS.getString("name"));
                             usuario.setEdad(rS.getInt("edad"));
@@ -127,6 +121,11 @@ public class UsuarioBBDD {
                             usuario.setNivel(rS.getInt("nivel"));
                             usuario.setIntercomunicador(rS.getBoolean("intercom"));
                             usuario.setMoto(new MotoShort(rS.getInt("idMoto"),rS.getString("uriMoto")));
+
+                            InvitacionShort invitacion = new InvitacionShort();
+                            invitacion.setUriInvitacion(rS.getString("uriInvitacion"));
+                            invitacion.setIdInvitacion(rS.getInt("idInvitacion"));
+                            usuario.getInvitacionShort().add(invitacion);
 
                         }
                     } catch (SQLException ex) {
@@ -170,7 +169,6 @@ public class UsuarioBBDD {
                         ex.printStackTrace();
                     }
                     try {
-                        i=0;
                         con.close();
                     } catch (SQLException ex) {
                         ex.printStackTrace();

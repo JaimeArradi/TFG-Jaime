@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class Usuario {
     private int id;
     private String name;
@@ -11,8 +13,7 @@ public class Usuario {
     private int nivel;
     private MotoShort moto; //motoshort para coger el id y uri para q el user elija su moto en la BBDD
     private Boolean intercomunicador;
-    private int idMoto;
-    //private int valoracion; quiza en un futuro valoraciones a usuario, no solo a ruta
+    private ArrayList<InvitacionShort> invitaciones = new ArrayList();
 
 
     public int getId() {
@@ -22,8 +23,6 @@ public class Usuario {
     public void setId(int id) {
         this.id = id;
     }
-
-
 
     public String getName() {
         return name;
@@ -96,32 +95,17 @@ public class Usuario {
     public void setIntercomunicador(Boolean intercomunicador) {
         this.intercomunicador = intercomunicador;
     }
-/*
 
-    public int getIdMoto() {
-        return idMoto;
-    }
-    public void setIdMoto(int idMoto) {
-        this.idMoto = idMoto;
-    }*/
-
-     /*
-    public int getValoracion() {
-        return valoracion;
+    public void addInvitacionShort(InvitacionShort invitacion){
+        this.invitaciones.add(invitacion);
     }
 
-    public void setValoracion(int valoracion) {
-        this.valoracion = valoracion;
+    public ArrayList<InvitacionShort> getInvitacionShort() {
+        return invitaciones;
     }
-    */
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", department='" + sexo + '\'' +
-                ", salary=" + edad +
-                '}';
+    public void setInvitacionShort(ArrayList<InvitacionShort> valoraciones) {
+        this.invitaciones = invitaciones;
     }
+
 }
