@@ -2,7 +2,6 @@ package entities;
 
 public class Invitacion {
     private int idInvitacion;
-    private String uriInvitacion;
 
     private UsuarioShort usuario;
     private QuedadaShort quedada;
@@ -13,14 +12,6 @@ public class Invitacion {
 
     public void setIdInvitacion(int idInvitacion) {
         this.idInvitacion = idInvitacion;
-    }
-
-    public String getUriInvitacion() {
-        return uriInvitacion;
-    }
-
-    public void setUriInvitacion(String uriInvitacion) {
-        this.uriInvitacion = uriInvitacion;
     }
 
     public UsuarioShort getUsuario() {

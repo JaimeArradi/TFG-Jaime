@@ -19,6 +19,7 @@ GET     /usuario/:id               controllers.UsuarioController.retrieve(id:Int
 POST    /usuarios               controllers.UsuarioController.create(request:Request)
 #PATCH   /usuario/:id          controllers.UsuarioController.update(request:Request, id:Int)
 DELETE  /usuario/:id           controllers.UsuarioController.delete(id:Int)
+#creo q no esta en la memoria ver usuarios confirmados /quedada/:id/usuarios
 GET     /quedadas              controllers.QuedadaController.listQuedadas()
 GET     /quedada/:id           controllers.QuedadaController.retrieve(id:Int)
 POST    /quedadas               controllers.QuedadaController.create(request:Request)
@@ -29,6 +30,11 @@ GET     /valoracion/:id           controllers.ValoracionController.retrieve(id:I
 POST    /valoraciones               controllers.ValoracionController.create(request:Request)
 #PATCH   /valoracion/:id          controllers.ValoracionController.update(request:Request, id:Int)
 DELETE  /valoracion/:id           controllers.ValoracionController.delete(id:Int)
+GET     /invitaciones          controllers.InvitacionController.listInvitaciones()
+GET     /invitacion/:id           controllers.InvitacionController.retrieve(id:Int)
+POST    /invitaciones               controllers.InvitacionController.create(request:Request)
+#PATCH   /invitacion/:id          controllers.InvitacionController.update(request:Request, id:Int)
+DELETE  /invitacion/:id           controllers.InvitacionController.delete(id:Int)
 
 
 # Map static resources from the /public folder to the /assets URL path

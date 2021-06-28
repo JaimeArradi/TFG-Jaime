@@ -18,5 +18,10 @@ public class QuedadaShort {
         this.uri = uri;
     }
 
+    public QuedadaShort(int id, String uri){
+        this.id=id;
+        this.uri=uri;
+    }
+
     public QuedadaShort(){}
 }

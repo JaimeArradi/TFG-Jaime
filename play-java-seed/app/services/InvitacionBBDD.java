@@ -10,10 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class UsuarioBBDD {
+public class InvitacionBBDD {
 
-    private static final UsuarioBBDD instance=new UsuarioBBDD();
-    public static UsuarioBBDD getInstance() {
+    private static final InvitacionBBDD instance=new InvitacionBBDD();
+    public static InvitacionBBDD getInstance() {
         return instance;
     }
 
@@ -54,51 +54,36 @@ public class UsuarioBBDD {
         return  valor;
     }
 
-   // public void addUsuario(String name,String department,  String pass, int salary ) throws SQLException, ClassNotFoundException {
-    public Usuario addUsuario(Usuario usuario) throws SQLException, ClassNotFoundException {
+    public Invitacion addInvitacion(Invitacion invitacion) throws SQLException, ClassNotFoundException {
         if (conector()) {
             try {
 
-                String name = usuario.getName();
-                int edad = usuario.getEdad();
-                String sexo = usuario.getSexo();
-                String bio = usuario.getBio();
-                String terreno = usuario.getTerreno();
-                String carne = usuario.getCarne();
-                int nivel = usuario.getNivel();
-                int intercomunicador;
-                if (usuario.getIntercomunicador()) {
-                    intercomunicador = 1;
-                } else {
-                    intercomunicador = 0;
-                }
-                int idMoto = usuario.getMoto().getId();
+                int idUsuario = invitacion.getUsuario().getId();
+                int idQuedada = invitacion.getQuedada().getId();
 
-                createStatement.executeUpdate("INSERT INTO usuario (name, edad, sexo, bio, terreno, carne, nivel, intercom, idMoto) VALUES ('" + name + "', '" + edad + "', '" + sexo + "'," +
-                        "'" + bio + "','" + terreno + "', '" + carne + "', '" + nivel + "','" + intercomunicador + "'" +
-                        ",'" + idMoto +"');",Statement.RETURN_GENERATED_KEYS);
+                createStatement.executeUpdate("INSERT INTO invitacion (idUsuario,idQuedada) VALUES ('" + idUsuario + "','" + idQuedada +"');",Statement.RETURN_GENERATED_KEYS);
                 ResultSet genUri = createStatement.getGeneratedKeys();
                 genUri.next();
                 int id =genUri.getInt(1);
-                String patron = "/usuario/";
+                String patron = "/invitacion/";
                 String uri = patron+id;
-                createStatement.executeUpdate("UPDATE usuario set uriUsuario ='" + uri + "' where idUsuario = "+ id + ";");
+                createStatement.executeUpdate("UPDATE  invitacion set uriInvitacion ='" + uri + "' where idInvitacion = "+ id + ";");
             }catch (Exception e){
                 e.printStackTrace();
             }
             con.close();
 
         }
-        return usuario;
+        return invitacion;
     }
 
-
-    public Usuario getUsuario(int id) {
-        Usuario usuario = new Usuario();
+    public Invitacion getInvitacion(int id) {
+        Invitacion invitacion = new Invitacion();
         try {
             if(conector()){
 
-                String queryBBDD = "SELECT * FROM usuario INNER JOIN invitacion ON invitacion.idUsuario = usuario.idUsuario WHERE usuario.idUsuario=" + id + ";";
+                String queryBBDD = "select * from invitacion INNER JOIN usuario ON invitacion.idUsuario=usuario.idUsuario INNER JOIN quedada ON invitacion.idQuedada=quedada.idQuedada where invitacion.idInvitacion=" + id + ";";
+
                 int i=0;
                 try {
                     rS = createStatement.executeQuery(queryBBDD);
@@ -106,134 +91,130 @@ public class UsuarioBBDD {
                     ex.printStackTrace();
                 }
                 if (rS == null){
-                    usuario= null;
+                    invitacion= null;
+
                 }
                 else{
+
                     try {
                         while (rS.next()) {
-                            usuario.setId(rS.getInt("idUsuario"));
-                            usuario.setName(rS.getString("name"));
-                            usuario.setEdad(rS.getInt("edad"));
-                            usuario.setSexo(rS.getString("sexo"));
-                            usuario.setBio(rS.getString("bio"));
-                            usuario.setTerreno(rS.getString("terreno"));
-                            usuario.setCarne(rS.getString("carne"));
-                            usuario.setNivel(rS.getInt("nivel"));
-                            usuario.setIntercomunicador(rS.getBoolean("intercom"));
-                            usuario.setMoto(new MotoShort(rS.getInt("idMoto"),rS.getString("uriMoto")));
-
-                            InvitacionShort invitacion = new InvitacionShort();
-                            invitacion.setUriInvitacion(rS.getString("uriInvitacion"));
                             invitacion.setIdInvitacion(rS.getInt("idInvitacion"));
-                            usuario.getInvitacionShort().add(invitacion);
-
+                            invitacion.setUsuario(new UsuarioShort(rS.getInt("idUsuario"),rS.getString("uriUsuario")));
+                            invitacion.setQuedada(new QuedadaShort(rS.getInt("idQuedada"),rS.getString("uriQuedada")));
                         }
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
                     try {
+                        i = 0;
                         con.close();
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
                 }
+
             }
             else{
-                    usuario=null;
+                    invitacion=null;
+
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(InvitacionBBDD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(InvitacionBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return usuario;
+        return invitacion;
     }
 
-        public ArrayList<UsuarioShort> getAllUsuarios() {
-            ArrayList<UsuarioShort> usuarioLista = new ArrayList();
+        public ArrayList<InvitacionShort> getAllInvitaciones() {
+            ArrayList<InvitacionShort> invitacionLista = new ArrayList();
             try {
                 if(conector()){
-                    String queryBBDD = "select * from usuario;";
+                    String queryBBDD = "select * from invitacion;";
                     int i=0;
                     try {
                         rS = createStatement.executeQuery(queryBBDD);
 
                         while (rS.next()) {
-                            UsuarioShort usuario = new UsuarioShort();
-                            usuario.setId(rS.getInt("idUsuario"));
-                            usuario.setUri(rS.getString("uriUsuario"));
-                            usuarioLista.add(usuario);//lista de usuario short
+                            InvitacionShort invitacion = new InvitacionShort();
+                            invitacion.setIdInvitacion(rS.getInt("idInvitacion"));
+                            invitacion.setUriInvitacion(rS.getString("uriInvitacion"));
+                            invitacionLista.add(invitacion);//lista de invitacion short
 
                         }
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
                     try {
+                        i=0;
                         con.close();
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
+
                 }
                 else{
-                    return usuarioLista;
+                    return invitacionLista;
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
             } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
             }
-            return usuarioLista;
+            //System.out.println("El tamano de la lista es" + invitacionLista.size());
+            return invitacionLista;
+
         }
 
         /*
-    public Usuario updateUsuario(Usuario usuario ) throws SQLException, ClassNotFoundException {
+    public Invitacion updateInvitacion(Invitacion invitacion ) throws SQLException, ClassNotFoundException {
         try {
         if (conector() == true) {
-            int id = usuario.getId();
-            String name= usuario.getName();
-            int edad = usuario.getEdad();
-            String sexo = usuario.getSexo();
-            String bio = usuario.getBio();
-            String terreno = usuario.getTerreno();
-            String carne = usuario.getCarne();
-            int nivel = usuario.getNivel();
+            int id = invitacion.getId();
+            String name= invitacion.getComentario();
+            int puntuacion = invitacion.getPuntuacion();
+            String sexo = invitacion.getSexo();
+            String bio = invitacion.getBio();
+            String terreno = invitacion.getTerreno();
+            String carne = invitacion.getCarne();
+            int nivel = invitacion.getNivel();
             //string moto...
-            Boolean intercomunicador = usuario.getIntercomunicador();
+            Boolean intercomunicador = invitacion.getIntercomunicador();
             System.out.println(name);
-            String queryBBDD = "update usuario set name='"+name+"', department='"+department+"',salary="+salary+" where id="+id+";";
+            String queryBBDD = "update invitacion set name='"+name+"', department='"+department+"',salary="+salary+" where id="+id+";";
 
             try {
                 createStatement.executeUpdate(queryBBDD);
             } catch (SQLException ex) {
-                Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(InvitacionBBDD.class.getComentario()).log(Level.SEVERE, null, ex);
             }
 
             try {
 
                 con.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(InvitacionBBDD.class.getComentario()).log(Level.SEVERE, null, ex);
             }
         }
         else{
 
         }
     } catch (SQLException ex) {
-        Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(InvitacionBBDD.class.getComentario()).log(Level.SEVERE, null, ex);
     } catch (ClassNotFoundException ex) {
-        Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(InvitacionBBDD.class.getComentario()).log(Level.SEVERE, null, ex);
     }
-        return usuario;
+        return invitacion;
     }
-*/
 
 
-    public boolean deleteUsuario(int id) throws SQLException, ClassNotFoundException {
+         */
+    public boolean deleteInvitacion(int id) throws SQLException, ClassNotFoundException {
         boolean valor= false;
         try {
-            if (conector()) {
+            if (conector() == true) {
 
-                String queryBBDD = "delete from usuario where idUsuario="+id+";";
+                String queryBBDD = "delete from invitacion where idInvitacion="+id+";";
 
                 try {
                     createStatement.executeUpdate(queryBBDD);
@@ -242,13 +223,16 @@ public class UsuarioBBDD {
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
+
                 try {
+
                     con.close();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
             }
             else{
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

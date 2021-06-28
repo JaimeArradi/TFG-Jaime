@@ -20,6 +20,11 @@ public class InvitacionShort {
         this.uriInvitacion = uriInvitacion;
     }
 
+    public InvitacionShort(int id, String uri){
+        this.idInvitacion=id;
+        this.uriInvitacion=uri;
+    }
+
     public InvitacionShort(){}
 }
 
