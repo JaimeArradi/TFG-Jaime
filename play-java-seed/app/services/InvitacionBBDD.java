@@ -126,6 +126,55 @@ public class InvitacionBBDD {
         return invitacion;
     }
 
+    public Invitacion getInvitacion1(int id, int idi) {
+        Invitacion invitacion = new Invitacion();
+        try {
+            if(conector()){
+
+                String queryBBDD = "SELECT * FROM usuario INNER JOIN invitacion ON invitacion.idUsuario = usuario.idUsuario INNER JOIN quedada on quedada.idQuedada=invitacion.idQuedada WHERE usuario.idUsuario="+id+" and invitacion.idInvitacion=" + idi + ";";
+
+                int i=0;
+                try {
+                    rS = createStatement.executeQuery(queryBBDD);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                if (rS == null){
+                    invitacion= null;
+
+                }
+                else{
+
+                    try {
+                        while (rS.next()) {
+                            invitacion.setIdInvitacion(rS.getInt("idInvitacion"));
+                            invitacion.setUsuario(new UsuarioShort(rS.getInt("idUsuario"),rS.getString("uriUsuario")));
+                            invitacion.setQuedada(new QuedadaShort(rS.getInt("idQuedada"),rS.getString("uriQuedada")));
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    try {
+                        i = 0;
+                        con.close();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+            }
+            else{
+                invitacion=null;
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return invitacion;
+    }
+
         public ArrayList<InvitacionShort> getAllInvitaciones() {
             ArrayList<InvitacionShort> invitacionLista = new ArrayList();
             try {

@@ -35,6 +35,15 @@ public class InvitacionController extends Controller {
         return ok(ApplicationUtil.createResponse(jsonObjects, true));
     }
 
+    public Result retrieve1(int id, int idi) {
+        Invitacion valoracion = InvitacionBBDD.getInstance().getInvitacion1(id, idi);
+        if (valoracion == null) {
+            return notFound(ApplicationUtil.createResponse("Invitacion with idInvitacion:" + idi + " not found", false));
+        }
+        JsonNode jsonObjects = Json.toJson(valoracion);
+        return ok(ApplicationUtil.createResponse(jsonObjects, true));
+    }
+
     public Result listInvitaciones() {
         ArrayList<InvitacionShort> result = InvitacionBBDD.getInstance().getAllInvitaciones();
         ObjectMapper mapper = new ObjectMapper();
