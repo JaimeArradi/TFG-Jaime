@@ -174,6 +174,46 @@ public class ValoracionBBDD {
 
         }
 
+    public ArrayList<ValoracionShort> getAllValoraciones1(int id) {
+        ArrayList<ValoracionShort> valoracionLista = new ArrayList();
+        try {
+            if(conector()){
+                String queryBBDD = "SELECT * FROM valoracion INNER JOIN usuario ON valoracion.idUsuario=usuario.idUsuario INNER JOIN ruta ON valoracion.idRuta=ruta.idRuta where valoracion.idRuta=" + id + ";";
+                int i=0;
+                try {
+                    rS = createStatement.executeQuery(queryBBDD);
+
+                    while (rS.next()) {
+                        ValoracionShort valoracion = new ValoracionShort();
+                        valoracion.setId(rS.getInt("idValoracion"));
+                        valoracion.setUri(rS.getString("uriValoracion"));
+                        valoracionLista.add(valoracion);//lista de valoracion short
+
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(ValoracionBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    i=0;
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ValoracionBBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            else{
+                return valoracionLista;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ValoracionBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ValoracionBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //System.out.println("El tamano de la lista es" + valoracionLista.size());
+        return valoracionLista;
+
+    }
+
         /*
     public Valoracion updateValoracion(Valoracion valoracion ) throws SQLException, ClassNotFoundException {
         try {

@@ -14,14 +14,19 @@ public class Quedada {
     private ArrayList<UsuarioShort> usuariosInvitados= new ArrayList<>();
     private ArrayList<UsuarioShort> usuariosRecomendados= new ArrayList<>();
 
-
-    //usuario shorts igual q el de moto (participantes)
-    //private UsuarioShort[] usuariosInv; // (invitados)tb uso usuario short lleva identificador de uri para poder añadir y eliminar -->
-    //private Usuario[] usariosRecomen; //(recomendados)se recomienda y usuario decide si los invita--> pasar de recomendados a invitados
     private RutaShort ruta;
     private String paradas; //coordenadas
     private String uriQuedada;
     private Tipo tipo;
+    Boolean recomendar = false;
+
+    public Boolean getRecomendar() {
+        return recomendar;
+    }
+
+    public void setRecomendar(Boolean recomendar) {
+        this.recomendar = recomendar;
+    }
 
     public int getId() {
         return id;

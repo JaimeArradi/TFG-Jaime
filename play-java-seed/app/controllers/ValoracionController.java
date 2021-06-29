@@ -43,6 +43,14 @@ public class ValoracionController extends Controller {
         return ok(ApplicationUtil.createResponse(jsonData, true));
 
     }
+    public Result listValoraciones1(int id) {
+        ArrayList<ValoracionShort> result = ValoracionBBDD.getInstance().getAllValoraciones1(id);
+        ObjectMapper mapper = new ObjectMapper();
+
+        JsonNode jsonData = mapper.convertValue(result, JsonNode.class);
+        return ok(ApplicationUtil.createResponse(jsonData, true));
+
+    }
 
     public Result delete(int id) throws SQLException, ClassNotFoundException {
         if (!ValoracionBBDD.getInstance().deleteValoracion(id)) {

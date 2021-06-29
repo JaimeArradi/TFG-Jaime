@@ -41,7 +41,14 @@ public class InvitacionController extends Controller {
 
         JsonNode jsonData = mapper.convertValue(result, JsonNode.class);
         return ok(ApplicationUtil.createResponse(jsonData, true));
+    }
 
+    public Result listInvitaciones1(int id) {
+        ArrayList<InvitacionShort> result = InvitacionBBDD.getInstance().getAllInvitaciones1(id);
+        ObjectMapper mapper = new ObjectMapper();
+
+        JsonNode jsonData = mapper.convertValue(result, JsonNode.class);
+        return ok(ApplicationUtil.createResponse(jsonData, true));
     }
 
     public Result delete(int id) throws SQLException, ClassNotFoundException {

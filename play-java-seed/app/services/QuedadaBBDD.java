@@ -70,6 +70,7 @@ public class QuedadaBBDD {
                 int idRuta = quedada.getRuta().getId();
                 int usuCreador =quedada.getCreador().getId();
                 String tipo = quedada.getTipo();
+                Boolean recomendar = quedada.getRecomendar();
                 //usuarios + usuariosInv + usuariosRecomen + usuCreador
 
                 createStatement.executeUpdate("INSERT INTO quedada (idQuedada,name,horaInicial,horaFinal," +

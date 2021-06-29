@@ -166,6 +166,46 @@ public class InvitacionBBDD {
 
         }
 
+    public ArrayList<InvitacionShort> getAllInvitaciones1(int id) {
+        ArrayList<InvitacionShort> invitacionLista = new ArrayList();
+        try {
+            if(conector()){
+                String queryBBDD = "SELECT * FROM usuario INNER JOIN invitacion ON invitacion.idUsuario = usuario.idUsuario WHERE usuario.idUsuario=" + id + ";";
+                int i=0;
+                try {
+                    rS = createStatement.executeQuery(queryBBDD);
+
+                    while (rS.next()) {
+                        InvitacionShort invitacion = new InvitacionShort();
+                        invitacion.setIdInvitacion(rS.getInt("idInvitacion"));
+                        invitacion.setUriInvitacion(rS.getString("uriInvitacion"));
+                        invitacionLista.add(invitacion);//lista de invitacion short
+
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                try {
+                    i=0;
+                    con.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+            else{
+                return invitacionLista;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        //System.out.println("El tamano de la lista es" + invitacionLista.size());
+        return invitacionLista;
+
+    }
+
         /*
     public Invitacion updateInvitacion(Invitacion invitacion ) throws SQLException, ClassNotFoundException {
         try {
