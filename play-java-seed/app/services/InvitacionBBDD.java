@@ -68,6 +68,8 @@ public class InvitacionBBDD {
                 String patron = "/invitacion/";
                 String uri = patron+id;
                 createStatement.executeUpdate("UPDATE  invitacion set uriInvitacion ='" + uri + "' where idInvitacion = "+ id + ";");
+                //createStatement.executeUpdate("INSERT INTO quedadausuarios (idUsuario,idQuedada) VALUES ('" + idUsuario + "','" + idQuedada +"');"
+                //falta pasar el rol, ¿tiene sentido hacer esta invitación o se hará desde quedada?
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -133,7 +135,6 @@ public class InvitacionBBDD {
 
                 String queryBBDD = "SELECT * FROM usuario INNER JOIN invitacion ON invitacion.idUsuario = usuario.idUsuario INNER JOIN quedada on quedada.idQuedada=invitacion.idQuedada WHERE usuario.idUsuario="+id+" and invitacion.idInvitacion=" + idi + ";";
 
-                int i=0;
                 try {
                     rS = createStatement.executeQuery(queryBBDD);
                 } catch (SQLException ex) {
@@ -155,7 +156,6 @@ public class InvitacionBBDD {
                         ex.printStackTrace();
                     }
                     try {
-                        i = 0;
                         con.close();
                     } catch (SQLException ex) {
                         ex.printStackTrace();

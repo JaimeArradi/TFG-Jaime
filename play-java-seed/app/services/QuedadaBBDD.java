@@ -55,7 +55,7 @@ public class QuedadaBBDD {
         return  valor;
     }
 
-   // public void addQuedada(String name,String department,  String pass, int salary ) throws SQLException, ClassNotFoundException {
+
     public Quedada addQuedada(Quedada quedada) throws SQLException, ClassNotFoundException {
         if (conector()) {
             try {
@@ -71,7 +71,31 @@ public class QuedadaBBDD {
                 int usuCreador =quedada.getCreador().getId();
                 String tipo = quedada.getTipo();
                 Boolean recomendar = quedada.getRecomendar();
-                //usuarios + usuariosInv + usuariosRecomen + usuCreador
+
+                ArrayList<UsuarioShort> usuariosConfirmados= quedada.getUsuariosConfirmados();
+                ArrayList<UsuarioShort> usuariosInvitados= quedada.getUsuariosInvitados();
+                ArrayList<UsuarioShort> usuariosRecomendados= new ArrayList<>();
+                if(recomendar){
+                    try {
+                        rS = createStatement.executeQuery("SELECT * FROM usuario WHERE idUsuario="+usuCreador+";");
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    int nivel = rS.getInt("nivel");
+                    try {
+                        rS1 = createStatement.executeQuery("SELECT * FROM usuario WHERE nivel ="+ nivel+" LIMIT 3;");
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    while(rS1.next()){
+                        UsuarioShort usuario = new UsuarioShort();
+                        usuario.setUri(rS1.getString("uriUsuario"));
+                        usuario.setId(rS1.getInt("idUsuario"));
+                        quedada.getUsuariosRecomendados().add(usuario);
+                    }
+                }
+
+                //usuarios + usuariosInv + usuariosRecomen
 
                 createStatement.executeUpdate("INSERT INTO quedada (idQuedada,name,horaInicial,horaFinal," +
                         "lugarPartida,lugarFinal,paradas, idRuta, idUsuCreador, tipo) VALUES (" + id + "," +
@@ -80,11 +104,38 @@ public class QuedadaBBDD {
                         " '" + idRuta+"', '" + usuCreador+"', '" + tipo+"');",Statement.RETURN_GENERATED_KEYS);
                 ResultSet genUri = createStatement.getGeneratedKeys();
                 genUri.next();
-
                 id =genUri.getInt(1);
                 String patron = "/quedada/";
                 String uri = patron+id;
                 createStatement.executeUpdate("UPDATE  quedada set uriQuedada ='" + uri + "' where idQuedada = "+ id + ";");
+
+                for(int i=0; i<usuariosConfirmados.size(); i++){
+                    int idc = usuariosConfirmados.get(i).getId();
+                    createStatement.executeUpdate("INSERT INTO quedadausuarios (idUsuario,idQuedada,rol) VALUES ("+idc+",'"+id+"','Conf');");
+                }
+                for(int i=0; i<usuariosInvitados.size(); i++){
+                    int idi = usuariosInvitados.get(i).getId();
+                    createStatement.executeUpdate("INSERT INTO quedadausuarios (idUsuario,idQuedada,rol) VALUES ("+idi+",'"+id+"','Inv');");
+                    createStatement.executeUpdate("INSERT INTO invitacion (idUsuario,idQuedada) VALUES ("+idi+",'"+id+"');",Statement.RETURN_GENERATED_KEYS);
+                    ResultSet genUri1 = createStatement.getGeneratedKeys();
+                    genUri1.next();
+                    int id1 =genUri1.getInt(1);
+                    String patron1 = "/invitacion/";
+                    String uri1 = patron1+id1;
+                    createStatement.executeUpdate("UPDATE  invitacion set uriInvitacion ='" + uri1 + "' where idInvitacion = "+ id1 + ";");
+                }
+                for(int i=0; i<usuariosRecomendados.size(); i++){
+                    int idr = usuariosRecomendados.get(i).getId();
+                    createStatement.executeUpdate("INSERT INTO quedadausuarios (idUsuario,idQuedada,rol) VALUES ("+idr+","+id+",'Recomen');");
+                    createStatement.executeUpdate("INSERT INTO invitacion (idUsuario,idQuedada) VALUES ("+idr+",'"+id+"');",Statement.RETURN_GENERATED_KEYS);
+                    ResultSet genUri2 = createStatement.getGeneratedKeys();
+                    genUri2.next();
+                    int id2 =genUri2.getInt(1);
+                    String patron2 = "/invitacion/";
+                    String uri2 = patron2+id2;
+                    createStatement.executeUpdate("UPDATE  invitacion set uriInvitacion ='" + uri2 + "' where idInvitacion = "+ id2 + ";");
+                }
+
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -109,10 +160,8 @@ public class QuedadaBBDD {
                 int i=0;
                 try {
                     rS = createStatement.executeQuery(queryBBDD);
-
                 } catch (SQLException ex) {
                     ex.printStackTrace();
-                    Logger.getLogger(QuedadaBBDD.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (rS == null){
                     quedada= null;

@@ -36,11 +36,11 @@ public class InvitacionController extends Controller {
     }
 
     public Result retrieve1(int id, int idi) {
-        Invitacion valoracion = InvitacionBBDD.getInstance().getInvitacion1(id, idi);
-        if (valoracion == null) {
+        Invitacion invitacion = InvitacionBBDD.getInstance().getInvitacion1(id, idi);
+        if (invitacion == null) {
             return notFound(ApplicationUtil.createResponse("Invitacion with idInvitacion:" + idi + " not found", false));
         }
-        JsonNode jsonObjects = Json.toJson(valoracion);
+        JsonNode jsonObjects = Json.toJson(invitacion);
         return ok(ApplicationUtil.createResponse(jsonObjects, true));
     }
 

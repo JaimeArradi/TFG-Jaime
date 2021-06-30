@@ -58,7 +58,6 @@ public class UsuarioBBDD {
     public Usuario addUsuario(Usuario usuario) throws SQLException, ClassNotFoundException {
         if (conector()) {
             try {
-
                 String name = usuario.getName();
                 int edad = usuario.getEdad();
                 String sexo = usuario.getSexo();
@@ -73,6 +72,7 @@ public class UsuarioBBDD {
                     intercomunicador = 0;
                 }
                 int idMoto = usuario.getMoto().getId();
+
 
                 createStatement.executeUpdate("INSERT INTO usuario (name, edad, sexo, bio, terreno, carne, nivel, intercom, idMoto) VALUES ('" + name + "', '" + edad + "', '" + sexo + "'," +
                         "'" + bio + "','" + terreno + "', '" + carne + "', '" + nivel + "','" + intercomunicador + "'" +
@@ -92,6 +92,41 @@ public class UsuarioBBDD {
         return usuario;
     }
 
+    public Boolean modifyInvitacion(RespuestaInvitacion invitacion, int id, int idi) throws SQLException, ClassNotFoundException {
+        boolean valor= false;
+        if (conector()) {
+            try {
+
+                String queryBBDD = "SELECT * FROM invitacion WHERE idInvitacion = " + idi + ";";
+                int idq=0;
+                try {
+                    rS = createStatement.executeQuery(queryBBDD);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                while(rS.next()) {
+                    idq = rS.getInt("idQuedada");
+                }
+                //System.out.println(idq);
+                Accion respuesta = invitacion.getAccion();
+                if (respuesta==Accion.ACEPTAR) {
+                    createStatement.executeUpdate("UPDATE quedadausuarios SET rol = 'Conf' WHERE idUsuario =" + id + " and idQuedada =" + idq + ";");
+                } else {
+                    try {
+                        createStatement.executeUpdate("DELETE FROM quedadausuarios WHERE idUsuario = " + id + " and idQuedada=" + idq + ";");
+                    }catch(SQLException ex){
+                        ex.printStackTrace();
+                    }
+                }
+                createStatement.executeUpdate("DELETE FROM invitacion WHERE idInvitacion = " + idi + ";");
+                valor=true;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            con.close();
+        }
+        return valor;
+    }
 
     public Usuario getUsuario(int id) {
         Usuario usuario = new Usuario();

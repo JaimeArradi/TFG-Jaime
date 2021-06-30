@@ -2,6 +2,8 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entities.Accion;
+import entities.RespuestaInvitacion;
 import entities.Usuario;
 import entities.UsuarioShort;
 import org.slf4j.Logger;
@@ -27,7 +29,19 @@ public class UsuarioController extends Controller {
         JsonNode jsonObject = Json.toJson(usuario);
         return created(ApplicationUtil.createResponse(jsonObject, true));
     }
-    
+
+    public Result modifyAction(Http.Request request, int id, int idi) throws SQLException, ClassNotFoundException {
+        JsonNode json = request.body().asJson();
+        if (json == null) {
+            return badRequest(ApplicationUtil.createResponse("Expecting JSON data", false));
+        }
+       Boolean valor= UsuarioBBDD.getInstance().modifyInvitacion(Json.fromJson(json, RespuestaInvitacion.class), id, idi);
+        if(valor){
+            return ok(ApplicationUtil.createResponse("Invitacion modificada", true));
+        }else{
+            return badRequest(ApplicationUtil.createResponse("Invitacion no modificada", false));
+        }
+    }
  
     public Result retrieve(int id) {
         Usuario usuario = UsuarioBBDD.getInstance().getUsuario(id);
