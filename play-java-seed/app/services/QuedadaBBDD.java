@@ -107,7 +107,7 @@ public class QuedadaBBDD {
                 ResultSet genUri = createStatement.getGeneratedKeys();
                 genUri.next();
                 int id =genUri.getInt(1);
-                String patron = "/quedada/";
+                String patron = "/quedadas/";
                 String uri = patron+id;
                 createStatement.executeUpdate("UPDATE  quedada set uriQuedada ='" + uri + "' where idQuedada = "+ id + ";");
 

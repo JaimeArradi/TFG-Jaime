@@ -234,7 +234,7 @@ public class MotoBBDD {
             ResultSet genUri = createStatement.getGeneratedKeys();
             genUri.next();
             int id =genUri.getInt(1);
-            String patron = "/moto/";
+            String patron = "/motos/";
             String uri = patron+id;
             createStatement.executeUpdate("UPDATE  moto set uriMoto ='" + uri + "' where idMoto = "+ id + ";");
             con.close();

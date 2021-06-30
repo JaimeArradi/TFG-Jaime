@@ -71,7 +71,7 @@ public class ValoracionBBDD {
                 ResultSet genUri = createStatement.getGeneratedKeys();
                 genUri.next();
                 id =genUri.getInt(1);
-                String patron = "/valoracion/";
+                String patron = "/valoraciones/";
                 String uri = patron+id;
                 createStatement.executeUpdate("UPDATE  valoracion set uriValoracion ='" + uri + "' where idValoracion = "+ id + ";");
             }catch (Exception e){
@@ -214,49 +214,7 @@ public class ValoracionBBDD {
 
     }
 
-        /*
-    public Valoracion updateValoracion(Valoracion valoracion ) throws SQLException, ClassNotFoundException {
-        try {
-        if (conector() == true) {
-            int id = valoracion.getId();
-            String name= valoracion.getComentario();
-            int puntuacion = valoracion.getPuntuacion();
-            String sexo = valoracion.getSexo();
-            String bio = valoracion.getBio();
-            String terreno = valoracion.getTerreno();
-            String carne = valoracion.getCarne();
-            int nivel = valoracion.getNivel();
-            //string moto...
-            Boolean intercomunicador = valoracion.getIntercomunicador();
-            System.out.println(name);
-            String queryBBDD = "update valoracion set name='"+name+"', department='"+department+"',salary="+salary+" where id="+id+";";
 
-            try {
-                createStatement.executeUpdate(queryBBDD);
-            } catch (SQLException ex) {
-                Logger.getLogger(ValoracionBBDD.class.getComentario()).log(Level.SEVERE, null, ex);
-            }
-
-            try {
-
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(ValoracionBBDD.class.getComentario()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else{
-
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(ValoracionBBDD.class.getComentario()).log(Level.SEVERE, null, ex);
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(ValoracionBBDD.class.getComentario()).log(Level.SEVERE, null, ex);
-    }
-        return valoracion;
-    }
-
-
-         */
     public boolean deleteValoracion(int id) throws SQLException, ClassNotFoundException {
         boolean valor= false;
         try {

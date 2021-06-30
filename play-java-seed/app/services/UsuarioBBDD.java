@@ -80,7 +80,7 @@ public class UsuarioBBDD {
                 ResultSet genUri = createStatement.getGeneratedKeys();
                 genUri.next();
                 int id =genUri.getInt(1);
-                String patron = "/usuario/";
+                String patron = "/usuarios/";
                 String uri = patron+id;
                 createStatement.executeUpdate("UPDATE usuario set uriUsuario ='" + uri + "' where idUsuario = "+ id + ";");
             }catch (Exception e){
@@ -184,49 +184,6 @@ public class UsuarioBBDD {
             }
             return usuarioLista;
         }
-
-        /*
-    public Usuario updateUsuario(Usuario usuario ) throws SQLException, ClassNotFoundException {
-        try {
-        if (conector() == true) {
-            int id = usuario.getId();
-            String name= usuario.getName();
-            int edad = usuario.getEdad();
-            String sexo = usuario.getSexo();
-            String bio = usuario.getBio();
-            String terreno = usuario.getTerreno();
-            String carne = usuario.getCarne();
-            int nivel = usuario.getNivel();
-            //string moto...
-            Boolean intercomunicador = usuario.getIntercomunicador();
-            System.out.println(name);
-            String queryBBDD = "update usuario set name='"+name+"', department='"+department+"',salary="+salary+" where id="+id+";";
-
-            try {
-                createStatement.executeUpdate(queryBBDD);
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            try {
-
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else{
-
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(UsuarioBBDD.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        return usuario;
-    }
-*/
-
 
     public boolean deleteUsuario(int id) throws SQLException, ClassNotFoundException {
         boolean valor= false;

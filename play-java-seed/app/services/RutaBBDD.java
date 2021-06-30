@@ -79,7 +79,7 @@ public class RutaBBDD {
             ResultSet genUri = createStatement.getGeneratedKeys();
             genUri.next();
             id =genUri.getInt(1);
-            String patron = "/ruta/";
+            String patron = "/rutas/";
             String uri = patron+id;
             createStatement.executeUpdate("UPDATE  ruta set uriRuta ='" + uri + "' where idRuta = "+ id + ";");
             con.close();
