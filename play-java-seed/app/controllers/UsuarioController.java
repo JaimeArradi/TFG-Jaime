@@ -30,19 +30,6 @@ public class UsuarioController extends Controller {
         return created(ApplicationUtil.createResponse(jsonObject, true));
     }
 
-    public Result modifyAction(Http.Request request, int id, int idi) throws SQLException, ClassNotFoundException {
-        JsonNode json = request.body().asJson();
-        if (json == null) {
-            return badRequest(ApplicationUtil.createResponse("Expecting JSON data", false));
-        }
-       Boolean valor= UsuarioBBDD.getInstance().modifyInvitacion(Json.fromJson(json, RespuestaInvitacion.class), id, idi);
-        if(valor){
-            return ok(ApplicationUtil.createResponse("Invitacion modificada", true));
-        }else{
-            return badRequest(ApplicationUtil.createResponse("Invitacion no modificada", false));
-        }
-    }
- 
     public Result retrieve(int id) {
         Usuario usuario = UsuarioBBDD.getInstance().getUsuario(id);
 
@@ -52,7 +39,6 @@ public class UsuarioController extends Controller {
         JsonNode jsonObjects = Json.toJson(usuario);
         return ok(ApplicationUtil.createResponse(jsonObjects, true));
     }
-
 
     /*public Result retrieve(int id, int idi) {
         Usuario usuario = UsuarioBBDD.getInstance().getUsuario(id);

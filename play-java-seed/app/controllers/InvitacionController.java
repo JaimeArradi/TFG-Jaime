@@ -4,11 +4,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Invitacion;
 import entities.InvitacionShort;
+import entities.RespuestaInvitacion;
+import entities.Usuario;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import services.InvitacionBBDD;
+import services.UsuarioBBDD;
 import utils.ApplicationUtil;
 
 import java.sql.SQLException;
@@ -34,6 +37,22 @@ public class InvitacionController extends Controller {
         JsonNode jsonObjects = Json.toJson(valoracion);
         return ok(ApplicationUtil.createResponse(jsonObjects, true));
     }
+
+    public Result modifyAction(Http.Request request, int id, int idi) throws SQLException, ClassNotFoundException {
+        JsonNode json = request.body().asJson();
+        if (json == null) {
+            return badRequest(ApplicationUtil.createResponse("Expecting JSON data", false));
+        }
+        Boolean valor= InvitacionBBDD.getInstance().modifyInvitacion(Json.fromJson(json, RespuestaInvitacion.class), id, idi);
+        if(valor){
+            return ok(ApplicationUtil.createResponse("Invitacion modificada", true));
+        }else{
+            return badRequest(ApplicationUtil.createResponse("Invitacion no modificada", false));
+        }
+    }
+
+
+
 
     public Result retrieve1(int id, int idi) {
         Invitacion invitacion = InvitacionBBDD.getInstance().getInvitacion1(id, idi);
