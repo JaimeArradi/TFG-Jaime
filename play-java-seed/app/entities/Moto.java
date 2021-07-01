@@ -15,7 +15,7 @@ public class Moto {
         this.id = id;
     }
 
-    public String getEstilo() { return estilo.toString(); } //Por que no vale esto: Estilo.valueOf(estilo)
+    public String getEstilo() { return estilo.toString(); }
 
     public void setEstilo(String estilo) {
         this.estilo = Estilo.valueOf(estilo);

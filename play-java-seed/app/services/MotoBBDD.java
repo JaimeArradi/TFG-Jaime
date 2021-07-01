@@ -154,42 +154,7 @@ public class MotoBBDD {
         return motoLista;
 
     }
-    /*
-    public Moto updateMoto(Moto moto ) throws SQLException, ClassNotFoundException {
-        try {
-            if (conector() == true) {
-                int id = moto.getId();
-                moto.setId(rS.getInt("idMoto"));
-                moto.setEstilo(rS.getString("estilo"));
-                moto.setMarca(rS.getString("marca"));
-                moto.setModelo(rS.getString("modelo"));
-                moto.setPotencia(rS.getInt("potencia"));
-                String queryBBDD = "update moto set estilo='"+ estilo+"', marca='"+marca+"',modelo="+modelo+", potencia="+potenica+" where idMoto="+id+";";
 
-                try {
-                    createStatement.executeUpdate(queryBBDD);
-                } catch (SQLException ex) {
-                    Logger.getLogger(MotoBBDD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                try {
-
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(MotoBBDD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            else{
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(MotoBBDD.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MotoBBDD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return moto;
-    }
-*/
     public boolean deleteMoto(int id) throws SQLException, ClassNotFoundException {
         boolean valor= false;
         try {

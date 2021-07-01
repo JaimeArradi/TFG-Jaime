@@ -54,7 +54,6 @@ public class UsuarioBBDD {
         return  valor;
     }
 
-   // public void addUsuario(String name,String department,  String pass, int salary ) throws SQLException, ClassNotFoundException {
     public Usuario addUsuario(Usuario usuario) throws SQLException, ClassNotFoundException {
         if (conector()) {
             try {
@@ -98,7 +97,7 @@ public class UsuarioBBDD {
         try {
             if(conector()){
 
-                String queryBBDD = "SELECT * FROM usuario INNER JOIN invitacion ON invitacion.idUsuario = usuario.idUsuario WHERE usuario.idUsuario=" + id + ";";
+                String queryBBDD = "SELECT * FROM usuario INNER JOIN invitacion ON invitacion.idUsuario = usuario.idUsuario INNER JOIN moto on usuario.idMoto = moto.idMoto WHERE usuario.idUsuario=" + id + ";";
                 int i=0;
                 try {
                     rS = createStatement.executeQuery(queryBBDD);

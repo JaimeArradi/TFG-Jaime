@@ -292,49 +292,6 @@ public class InvitacionBBDD {
 
     }
 
-        /*
-    public Invitacion updateInvitacion(Invitacion invitacion ) throws SQLException, ClassNotFoundException {
-        try {
-        if (conector() == true) {
-            int id = invitacion.getId();
-            String name= invitacion.getComentario();
-            int puntuacion = invitacion.getPuntuacion();
-            String sexo = invitacion.getSexo();
-            String bio = invitacion.getBio();
-            String terreno = invitacion.getTerreno();
-            String carne = invitacion.getCarne();
-            int nivel = invitacion.getNivel();
-            //string moto...
-            Boolean intercomunicador = invitacion.getIntercomunicador();
-            System.out.println(name);
-            String queryBBDD = "update invitacion set name='"+name+"', department='"+department+"',salary="+salary+" where id="+id+";";
-
-            try {
-                createStatement.executeUpdate(queryBBDD);
-            } catch (SQLException ex) {
-                Logger.getLogger(InvitacionBBDD.class.getComentario()).log(Level.SEVERE, null, ex);
-            }
-
-            try {
-
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(InvitacionBBDD.class.getComentario()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else{
-
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(InvitacionBBDD.class.getComentario()).log(Level.SEVERE, null, ex);
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(InvitacionBBDD.class.getComentario()).log(Level.SEVERE, null, ex);
-    }
-        return invitacion;
-    }
-
-
-         */
     public boolean deleteInvitacion(int id) throws SQLException, ClassNotFoundException {
         boolean valor= false;
         try {
