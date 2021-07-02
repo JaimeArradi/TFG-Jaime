@@ -15,8 +15,14 @@ import play.mvc.Result;
 import services.UsuarioBBDD;
 import utils.ApplicationUtil;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import freemarker.template.TemplateExceptionHandler;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
+
 
 public class UsuarioController extends Controller {
 
@@ -29,7 +35,7 @@ public class UsuarioController extends Controller {
         JsonNode jsonObject = Json.toJson(usuario);
         return created(ApplicationUtil.createResponse(jsonObject, true));
     }
-
+/*
     public Result retrieve(int id) {
         Usuario usuario = UsuarioBBDD.getInstance().getUsuario(id);
 
@@ -39,8 +45,9 @@ public class UsuarioController extends Controller {
         JsonNode jsonObjects = Json.toJson(usuario);
         return ok(ApplicationUtil.createResponse(jsonObjects, true));
     }
-
-    /*public Result retrieve(int id, int idi) {
+*/
+/*
+    public Result retrieve(Http.Request request,int id) {
         Usuario usuario = UsuarioBBDD.getInstance().getUsuario(id);
 
         if (usuario == null) {
@@ -49,25 +56,75 @@ public class UsuarioController extends Controller {
         JsonNode jsonObjects = Json.toJson(usuario);
         return ok(ApplicationUtil.createResponse(jsonObjects, true));
     }*/
-    /*
-    public Result retrieve(int idUsuario, int idValoracion) {
+
+    public Result retrieve(Http.Request request,int id) {
         Usuario usuario = UsuarioBBDD.getInstance().getUsuario(id);
+            if (request.accepts("text/html")) {
+                String output = "error";
+                try {
+                    Configuration cfg = new Configuration(Configuration.VERSION_2_3_30);
+                    cfg.setClassLoaderForTemplateLoading(this.getClass().getClassLoader(), "/templates/");
+                    cfg.setDefaultEncoding("UTF-8");
+                    cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
+                    cfg.setLogTemplateExceptions(false);
 
-        if (usuario == null) {
-            return notFound(ApplicationUtil.createResponse("Usuario with idUsuario:" + id + " not found", false));
+                    cfg.setWrapUncheckedExceptions(true);
+                    cfg.setFallbackOnNullLoopVariable(false);
+                    cfg.setNumberFormat("computer");
+
+                    Template template = cfg.getTemplate("usuario.ftl");
+                    StringWriter sw = new StringWriter();
+                    Map<String, Object> mapa = new TreeMap<String, Object>();
+                    mapa.put("usuario", usuario); // a usuario lo llamo "usuario"
+                    template.process(mapa, sw);
+                    output = sw.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return ok(output).as("text/html");
+            }
+         else {
+                    JsonNode jsonObjects = Json.toJson(UsuarioBBDD.getInstance().getUsuario(id));
+            return ok(ApplicationUtil.createResponse(jsonObjects, true));
+
         }
-        JsonNode jsonObjects = Json.toJson(usuario);
-        return ok(ApplicationUtil.createResponse(jsonObjects, true));
+
+
     }
-    */
 
-    public Result listUsuarios() {
+    public Result listUsuarios(Http.Request request) {
         ArrayList<UsuarioShort> result = UsuarioBBDD.getInstance().getAllUsuarios();
-        ObjectMapper mapper = new ObjectMapper();
 
-        JsonNode jsonData = mapper.convertValue(result, JsonNode.class);
-        return ok(ApplicationUtil.createResponse(jsonData, true));
+        if (request.accepts("text/html")) {
+            String output = "error";
+            try {
+                Configuration cfg = new Configuration(Configuration.VERSION_2_3_30);
+                cfg.setClassLoaderForTemplateLoading(this.getClass().getClassLoader(), "/templates/");
+                cfg.setDefaultEncoding("UTF-8");
+                cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
+                cfg.setLogTemplateExceptions(false);
 
+                cfg.setWrapUncheckedExceptions(true);
+                cfg.setFallbackOnNullLoopVariable(false);
+                cfg.setNumberFormat("computer");
+
+                Template template = cfg.getTemplate("usuarios.ftl");
+                StringWriter sw = new StringWriter();
+                Map<String, Object> mapa = new TreeMap<String, Object>();
+                mapa.put("usuarios", result); // a usuario lo llamo "usuario"
+                template.process(mapa, sw);
+                output = sw.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return ok(output).as("text/html");
+        }
+        else {
+
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonData = mapper.convertValue(result, JsonNode.class);
+            return ok(ApplicationUtil.createResponse(jsonData, true));
+        }
     }
 
     public Result delete(int id) throws SQLException, ClassNotFoundException {

@@ -51,22 +51,23 @@ public class Ruta {
         this.km = km;
     }
 
-    public String getEstadoAsfalto() {
-        return estadoAsfalto.toString();
-    }
+    /*
+        public String getEstadoAsfalto() {
+            return estadoAsfalto.toString();
+        }
 
-    public void setEstadoAsfalto(String estadoAsfalto) {
-        this.estadoAsfalto = EstadoAsfalto.valueOf(estadoAsfalto.toUpperCase());
-    }
+        public void setEstadoAsfalto(String estadoAsfalto) {
+            this.estadoAsfalto = EstadoAsfalto.valueOf(estadoAsfalto.toUpperCase());
+        }
 
-    public String getTerreno() {
-        return terreno.toString();
-    }
+        public String getTerreno() {
+            return terreno.toString();
+        }
 
-    public void setTerreno(String terreno) {
-        this.terreno = Terreno.valueOf(terreno);
-    }
-
+        public void setTerreno(String terreno) {
+            this.terreno = Terreno.valueOf(terreno);
+        }
+    */
     public int getDificultad() {
         return dificultad;
     }
@@ -75,12 +76,36 @@ public class Ruta {
         this.dificultad = dificultad;
     }
 
-    public void addValoracion(ValoracionShort v){
+    public void addValoracion(ValoracionShort v) {
         this.valoraciones.add(v);
     }
 
     public ArrayList<ValoracionShort> getValoraciones() {
         return valoraciones;
+    }
+
+    public EstadoAsfalto getEstadoAsfalto() {
+        return estadoAsfalto;
+    }
+
+    public void setEstadoAsfalto(EstadoAsfalto estadoAsfalto) {
+        this.estadoAsfalto = estadoAsfalto;
+    }
+
+    public Terreno getTerreno() {
+        return terreno;
+    }
+
+    public void setTerreno(Terreno terreno) {
+        this.terreno = terreno;
+    }
+
+    public Trafico getTrafico() {
+        return trafico;
+    }
+
+    public void setTrafico(Trafico trafico) {
+        this.trafico = trafico;
     }
 
     public void setValoraciones(ArrayList<ValoracionShort> valoraciones) {
@@ -94,7 +119,8 @@ public class Ruta {
     public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
-
+}
+/*
     public String getTrafico() {
         return trafico.toString();
     }
@@ -103,7 +129,7 @@ public class Ruta {
         this.trafico = Trafico.valueOf(trafico);
     }
 }
-    /*
+
     @Override
     public String toString() {
         return "Employee{" +

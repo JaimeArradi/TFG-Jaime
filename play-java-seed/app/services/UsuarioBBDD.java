@@ -59,10 +59,10 @@ public class UsuarioBBDD {
             try {
                 String name = usuario.getName();
                 int edad = usuario.getEdad();
-                String sexo = usuario.getSexo();
+                Sexo sexo = usuario.getSexo();
                 String bio = usuario.getBio();
-                String terreno = usuario.getTerreno();
-                String carne = usuario.getCarne();
+                Terreno terreno = usuario.getTerreno();
+                Carne carne = usuario.getCarne();
                 int nivel = usuario.getNivel();
                 int intercomunicador;
                 if (usuario.getIntercomunicador()) {
@@ -97,7 +97,7 @@ public class UsuarioBBDD {
         try {
             if(conector()){
 
-                String queryBBDD = "SELECT * FROM usuario INNER JOIN invitacion ON invitacion.idUsuario = usuario.idUsuario INNER JOIN moto on usuario.idMoto = moto.idMoto WHERE usuario.idUsuario=" + id + ";";
+                String queryBBDD = "SELECT * FROM usuario LEFT JOIN invitacion ON invitacion.idUsuario = usuario.idUsuario LEFT JOIN moto on usuario.idMoto = moto.idMoto WHERE usuario.idUsuario=" + id + ";";
                 int i=0;
                 try {
                     rS = createStatement.executeQuery(queryBBDD);
@@ -113,10 +113,10 @@ public class UsuarioBBDD {
                             usuario.setId(rS.getInt("idUsuario"));
                             usuario.setName(rS.getString("name"));
                             usuario.setEdad(rS.getInt("edad"));
-                            usuario.setSexo(rS.getString("sexo"));
+                            usuario.setSexo(Sexo.valueOf(rS.getString("sexo")));
                             usuario.setBio(rS.getString("bio"));
-                            usuario.setTerreno(rS.getString("terreno"));
-                            usuario.setCarne(rS.getString("carne"));
+                            usuario.setTerreno(Terreno.valueOf(rS.getString("terreno")));
+                            usuario.setCarne(Carne.valueOf(rS.getString("carne")));
                             usuario.setNivel(rS.getInt("nivel"));
                             usuario.setIntercomunicador(rS.getBoolean("intercom"));
                             usuario.setMoto(new MotoShort(rS.getInt("idMoto"),rS.getString("uriMoto")));

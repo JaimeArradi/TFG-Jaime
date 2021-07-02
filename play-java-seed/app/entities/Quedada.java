@@ -108,12 +108,13 @@ public class Quedada {
         this.usuariosRecomendados = usuariosRecomendados;
     }
 
-        public String getTipo() { return tipo.toString(); }
+    public Tipo getTipo() {
+        return tipo;
+    }
 
-        public void setTipo(String tipo) {
-            this.tipo = Tipo.valueOf(tipo);
-        }
-
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
 
     public String getParadas() {
         return paradas;

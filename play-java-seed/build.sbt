@@ -14,5 +14,9 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies ++= Seq(
+  "org.freemarker" % "freemarker" % "2.3.31"
+)
+
+libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "8.0.23"
 )

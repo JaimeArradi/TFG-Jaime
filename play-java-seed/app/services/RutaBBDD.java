@@ -1,9 +1,6 @@
 package services;
 
-import entities.Ruta;
-import entities.RutaShort;
-import entities.UsuarioShort;
-import entities.ValoracionShort;
+import entities.*;
 import play.db.Database;
 import play.db.Databases;
 
@@ -65,12 +62,12 @@ public class RutaBBDD {
             String name= ruta.getName();
             String recorrido = ruta.getRecorrido();
             int km = ruta.getKm();
-            String estadoAsfalto = ruta.getEstadoAsfalto();
-            String terreno = ruta.getTerreno();
+            EstadoAsfalto estadoAsfalto = ruta.getEstadoAsfalto();
+            Terreno terreno = ruta.getTerreno();
             int dificultad = ruta.getDificultad();
             //valoracion = getval
             int duracion = ruta.getDuracion();
-            String trafico = ruta.getTrafico();
+            Trafico trafico = ruta.getTrafico();
 
 
             createStatement.executeUpdate("INSERT INTO ruta (idRuta,name,recorrido,km,estadoAsfalto,terreno,dificultad,duracion" +
@@ -92,7 +89,7 @@ public class RutaBBDD {
         try {
             if(conector()==true){
 
-                String queryBBDD = "SELECT * FROM ruta INNER JOIN valoracion ON valoracion.idRuta = ruta.idRuta " +
+                String queryBBDD = "SELECT * FROM ruta LEFT JOIN valoracion ON valoracion.idRuta = ruta.idRuta " +
                         "WHERE ruta.idRuta =" + id + ";";
                 int i=0;
                 try {
@@ -112,14 +109,14 @@ public class RutaBBDD {
                             ruta.setName(rS.getString("name"));
                             ruta.setRecorrido(rS.getString("recorrido"));
                             ruta.setKm(rS.getInt("km"));
-                            ruta.setEstadoAsfalto(rS.getString("estadoAsfalto"));
-                            ruta.setTerreno(rS.getString("terreno"));
+                            ruta.setEstadoAsfalto(EstadoAsfalto.valueOf(rS.getString("estadoAsfalto")));
+                            ruta.setTerreno(Terreno.valueOf(rS.getString("terreno")));
                             ruta.setDificultad(rS.getInt("dificultad"));
                             ruta.addValoracion(new ValoracionShort(rS.getInt("idValoracion"),rS.getString("uriValoracion")));
                             //ruta.add y voy añadiendo a valoracionShort
                             //mas de una valoracion, como las muestros??
                             ruta.setDuracion(rS.getInt("duracion"));
-                            ruta.setTrafico(rS.getString("trafico"));
+                            ruta.setTrafico(Trafico.valueOf(rS.getString("trafico")));
                             ValoracionShort valoracion = new ValoracionShort();
                             valoracion.setUri(rS.getString("uriValoracion"));
                             valoracion.setId(rS.getInt("idValoracion"));

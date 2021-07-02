@@ -68,7 +68,7 @@ public class QuedadaBBDD {
                 String paradas = quedada.getParadas();
                 int idRuta = quedada.getRuta().getId();
                 int usuCreador =quedada.getCreador().getId();
-                String tipo = quedada.getTipo();
+                Tipo tipo = quedada.getTipo();
                 Boolean recomendar = quedada.getRecomendar();
 
                 ArrayList<UsuarioShort> usuariosConfirmados= quedada.getUsuariosConfirmados();
@@ -122,8 +122,7 @@ public class QuedadaBBDD {
                     ResultSet genUri1 = createStatement.getGeneratedKeys();
                     genUri1.next();
                     int id1 =genUri1.getInt(1);
-                    String patron1 = "/invitacion/";
-                    String uri1 = patron1+id1;
+                    String uri1 = "/usuarios/"+idi+"/invitaciones/"+id1;
                     createStatement.executeUpdate("UPDATE  invitacion set uriInvitacion ='" + uri1 + "' where idInvitacion = "+ id1 + ";");
                 }
                 for(int i=0; i<usuariosRecomendados.size(); i++){
@@ -134,7 +133,6 @@ public class QuedadaBBDD {
                     genUri2.next();
                     int id2 =genUri2.getInt(1);
                     String uri2 = "/usuarios/"+idr+"/invitaciones/"+id2;
-                    //String uri2 = patron2+id2;
                     createStatement.executeUpdate("UPDATE  invitacion set uriInvitacion ='" + uri2 + "' where idInvitacion = "+ id2 + ";");
                 }
 
@@ -183,7 +181,7 @@ public class QuedadaBBDD {
                             quedada.setLugarFinal(rS.getString("lugarFinal"));
                             //quedada.setValoracion(rS.getInt("valoracion"));
                             quedada.setRuta(new RutaShort(rS.getInt("idRuta"),rS.getString("uriRuta")));
-                            quedada.setTipo(rS.getString("tipo"));
+                            quedada.setTipo(Tipo.valueOf(rS.getString("tipo")));
                             //usuarios + usuariosInv + usuariosRecomen
                             quedada.setParadas(rS.getString("paradas"));
                             quedada.setUriQuedada(rS.getString("uriQuedada"));

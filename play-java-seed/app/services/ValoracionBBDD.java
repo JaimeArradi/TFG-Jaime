@@ -58,19 +58,17 @@ public class ValoracionBBDD {
     public Valoracion addValoracion(Valoracion valoracion) throws SQLException, ClassNotFoundException {
         if (conector()) {
             try {
-
-                int id = valoracion.getId();
                 String comentario = valoracion.getComentario();
                 int puntuacion = valoracion.getPuntuacion();
                 int idUsuario = valoracion.getUsuario().getId();
                 int idRuta = valoracion.getRuta().getId();
 
-                createStatement.executeUpdate("INSERT INTO valoracion (idValoracion,comentario,puntuacion," +
-                        "idUsuario,idRuta) VALUES (" + id + ", '" + comentario + "', '" + puntuacion + "', '" + idUsuario + "'," +
+                createStatement.executeUpdate("INSERT INTO valoracion (comentario,puntuacion," +
+                        "idUsuario,idRuta) VALUES ('" + comentario + "', '" + puntuacion + "', '" + idUsuario + "'," +
                         "'" + idRuta +"');",Statement.RETURN_GENERATED_KEYS);
                 ResultSet genUri = createStatement.getGeneratedKeys();
                 genUri.next();
-                id =genUri.getInt(1);
+                int id =genUri.getInt(1);
                 String patron = "/valoraciones/";
                 String uri = patron+id;
                 createStatement.executeUpdate("UPDATE  valoracion set uriValoracion ='" + uri + "' where idValoracion = "+ id + ";");

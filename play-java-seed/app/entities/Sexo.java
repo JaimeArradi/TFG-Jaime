@@ -1,3 +1,3 @@
 package entities;
 
-enum Sexo {HOMBRE, MUJER}
+public enum Sexo {HOMBRE, MUJER}

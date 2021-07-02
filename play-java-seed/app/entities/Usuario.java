@@ -32,14 +32,25 @@ public class Usuario {
         this.name = name;
     }
 
-    public String getSexo() {
-        return sexo.toString();
+    public Sexo getSexo() {
+        return sexo;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = Sexo.valueOf(sexo);
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
     }
+/*
 
+        public String getSexo() {
+            return (sexo!=null?sexo.toString():"");
+        }
+
+        public void setSexo(String sexo) {
+
+            this.sexo = Sexo.valueOf(sexo);
+            System.out.println("el sexo es: "+this.sexo+", el parametro es: "+sexo);
+        }
+    */
     public String getBio() {
         return bio;
     }
@@ -56,14 +67,23 @@ public class Usuario {
         this.edad = edad;
     }
 
-    public String getTerreno() {
-        return terreno.toString();
+    public Terreno getTerreno() {
+        return terreno;
     }
 
-    public void setTerreno(String terreno) {
-        this.terreno = Terreno.valueOf(terreno);
+    public void setTerreno(Terreno terreno) {
+        this.terreno = terreno;
     }
 
+    /*
+        public String getTerreno() {
+            return terreno.toString();
+        }
+
+        public void setTerreno(String terreno) {
+            this.terreno = Terreno.valueOf(terreno);
+        }
+    */
     public int getNivel() {
         return nivel;
     }
@@ -72,14 +92,23 @@ public class Usuario {
         this.nivel = nivel;
     }
 
-    public String getCarne() {
-        return carne.toString();
+    public Carne getCarne() {
+        return carne;
     }
 
-    public void setCarne(String carne) {
-        this.carne = Carne.valueOf(carne);
+    public void setCarne(Carne carne) {
+        this.carne = carne;
     }
 
+    /*
+        public String getCarne() {
+            return carne.toString();
+        }
+
+        public void setCarne(String carne) {
+            this.carne = Carne.valueOf(carne);
+        }
+    */
     public MotoShort getMoto() {
         return moto;
     }
