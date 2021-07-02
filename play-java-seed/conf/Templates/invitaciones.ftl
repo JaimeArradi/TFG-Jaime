@@ -2,7 +2,7 @@
 <meta charset="UTF-8">
 <html>
 <head>
-  <title>/Usuarios</title>
+  <title>/Invitaciones</title>
 
 </head>
 <body>

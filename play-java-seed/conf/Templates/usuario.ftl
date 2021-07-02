@@ -8,9 +8,9 @@
 
 <body>
 
-<h2>Usuarios registrados</h2>
+<h2>Usuarios con id ${usuario.id}</h2>
 
-<table style="width:100%">
+<table style="width:75%">
   <tr>
     <th>Nombre</th>
     <th>Edad</th>
@@ -25,18 +25,15 @@
   </tr>
   <tr>
     <td>${usuario.name}</td>
-    <td><a href="${usuario.getMoto().uri}">${usuario.getMoto().uri}</a></td>
     <td>${usuario.edad}</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>80</td>
+    <td>${usuario.sexo}</td>
+    <td>${usuario.bio}</td>
+    <td>${usuario.nivel}</td>
+    <td>${usuario.terreno}</td>
+    <td>${usuario.carne}</td>
+    <td><a href="${usuario.getMoto().uri}">${usuario.getMoto().uri}</a></td>
+    <td>${usuario.intercomunicador?string('Si', 'No')}</td>
+    <td>${usuario.edad}</td>
   </tr>
 </table>
 </body>

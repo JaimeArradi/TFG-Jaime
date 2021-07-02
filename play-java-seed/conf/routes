@@ -3,7 +3,7 @@
 # ~~~~
 
 GET     /motos                               controllers.MotoController.listMotos()
-GET     /motos/:id                           controllers.MotoController.retrieve(id:Int)
+GET     /motos/:id                           controllers.MotoController.retrieve(request:Request,id:Int)
 POST    /motos                               controllers.MotoController.create(request:Request)
 DELETE  /motos/:id                           controllers.MotoController.delete(id:Int)
 GET     /rutas                               controllers.RutaController.listRutas()
