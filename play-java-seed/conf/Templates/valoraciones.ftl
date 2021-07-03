@@ -23,17 +23,17 @@
 <body>
 
 
-<h2>Lista de invitaciones de una ruta</h2>
+<h2>Lista de valoraciones de una ruta</h2>
 
 <table>
     <tr>
             <th>Id de la valoración</th>
             <th>URI</th>
           </tr>
-    <#list invitaciones as invitacion>
+    <#list valoraciones as valoracion>
       <tr>
-        <td>${invitacion.idInvitacion}</td>
-        <td><a href="${invitacion.uriInvitacion}">${invitacion.uriInvitacion}</a></td>
+        <td>${valoracion.id}</td>
+        <td><a href="${valoracion.uri}">${valoracion.uri}</a></td>
       </tr>
       </#list>
     </table>

@@ -2,7 +2,6 @@
 <meta charset="UTF-8">
 <html>
 <head>
-
   <style>
         table {
           font-family: arial, sans-serif;
@@ -25,22 +24,18 @@
 
 <body>
 
-<h2>Información de la moto ${moto.id}</h2>
+<h2>Información de la invitacion ${invitacion.idInvitacion}</h2>
 
 
 <table>
 <table style="width:25%">
   <tr>
-    <th>Marca</th>
-    <th>Modelo</th>
-    <th>Estilo</th>
-    <th>Potencia (cv)</th>
+    <th>Usuario</th>
+    <th>Quedada</th>
   </tr>
   <tr>
-    <td>${moto.marca}</td>
-    <td>${moto.modelo}</td>
-    <td>${moto.estilo}</td>
-    <td>${moto.potencia}</td>
+    <td><a href="${invitacion.getUsuario().uri}">${invitacion.getUsuario().uri}</a></td>
+    <td><a href="${invitacion.getQuedada().uri}">${invitacion.getQuedada().uri}</a></td>
   </tr>
 </table>
 </body>

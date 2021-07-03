@@ -72,14 +72,37 @@ public class MotoController extends Controller {
         }
     }
 
-        public Result listMotos () {
+        public Result listMotos (Http.Request request) {
             ArrayList<MotoShort> result = MotoBBDD.getInstance().getAllMotos();
-            logger.debug("In MotoController.listMotos(), result is: {}", result.toString());
-            ObjectMapper mapper = new ObjectMapper();
+            if (request.accepts("text/html")) {
+                String output = "error";
+                try {
+                    Configuration cfg = new Configuration(Configuration.VERSION_2_3_30);
+                    cfg.setClassLoaderForTemplateLoading(this.getClass().getClassLoader(), "/templates/");
+                    cfg.setDefaultEncoding("UTF-8");
+                    cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
+                    cfg.setLogTemplateExceptions(false);
 
-            JsonNode jsonData = mapper.convertValue(result, JsonNode.class);
-            return ok(ApplicationUtil.createResponse(jsonData, true));
+                    cfg.setWrapUncheckedExceptions(true);
+                    cfg.setFallbackOnNullLoopVariable(false);
+                    cfg.setNumberFormat("computer");
 
+                    Template template = cfg.getTemplate("motos.ftl");
+                    StringWriter sw = new StringWriter();
+                    Map<String, Object> mapa = new TreeMap<String, Object>();
+                    mapa.put("motos", result); // a moto lo llamo "moto"
+                    template.process(mapa, sw);
+                    output = sw.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return ok(output).as("text/html");
+            }
+            else {
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode jsonData = mapper.convertValue(result, JsonNode.class);
+                return ok(ApplicationUtil.createResponse(jsonData, true));
+            }
         }
 
         public Result delete ( int id) throws SQLException, ClassNotFoundException {

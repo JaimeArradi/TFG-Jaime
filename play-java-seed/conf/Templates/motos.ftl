@@ -23,17 +23,17 @@
 <body>
 
 
-<h2>Lista de invitaciones de una ruta</h2>
+<h2>Lista de motos</h2>
 
 <table>
     <tr>
-            <th>Id de la valoración</th>
+            <th>Id de la moto</th>
             <th>URI</th>
           </tr>
-    <#list invitaciones as invitacion>
+    <#list motos as moto>
       <tr>
-        <td>${invitacion.idInvitacion}</td>
-        <td><a href="${invitacion.uriInvitacion}">${invitacion.uriInvitacion}</a></td>
+        <td>${moto.id}</td>
+        <td><a href="${moto.uri}">${moto.uri}</a></td>
       </tr>
       </#list>
     </table>

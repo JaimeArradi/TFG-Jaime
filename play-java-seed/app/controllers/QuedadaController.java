@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Quedada;
 import entities.QuedadaShort;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateExceptionHandler;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -11,8 +14,11 @@ import play.mvc.Result;
 import services.QuedadaBBDD;
 import utils.ApplicationUtil;
 
+import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class QuedadaController extends Controller {
 
@@ -27,22 +33,71 @@ public class QuedadaController extends Controller {
         return created(ApplicationUtil.createResponse(jsonObject, true));
     }
 
-    public Result retrieve(int id) {
+    public Result retrieve(Http.Request request, int id) {
         Quedada quedada = QuedadaBBDD.getInstance().getQuedada(id);
         if (quedada == null) {
             return notFound(ApplicationUtil.createResponse("Quedada with idQuedada:" + id + " not found", false));
         }
-        JsonNode jsonObjects = Json.toJson(quedada);
-        return ok(ApplicationUtil.createResponse(jsonObjects, true));
+        if (request.accepts("text/html")) {
+            String output = "error";
+            try {
+                Configuration cfg = new Configuration(Configuration.VERSION_2_3_30);
+                cfg.setClassLoaderForTemplateLoading(this.getClass().getClassLoader(), "/templates/");
+                cfg.setDefaultEncoding("UTF-8");
+                cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
+                cfg.setLogTemplateExceptions(false);
+
+                cfg.setWrapUncheckedExceptions(true);
+                cfg.setFallbackOnNullLoopVariable(false);
+                cfg.setNumberFormat("computer");
+
+                Template template = cfg.getTemplate("quedada.ftl");
+                StringWriter sw = new StringWriter();
+                Map<String, Object> mapa = new TreeMap<String, Object>();
+                mapa.put("quedada", quedada);
+                template.process(mapa, sw);
+                output = sw.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return ok(output).as("text/html");
+        } else {
+            JsonNode jsonObjects = Json.toJson(quedada);
+            return ok(ApplicationUtil.createResponse(jsonObjects, true));
+        }
     }
 
-    public Result listQuedadas() {
+    public Result listQuedadas(Http.Request request) {
         ArrayList<QuedadaShort> result = QuedadaBBDD.getInstance().getAllQuedadas();
-        ObjectMapper mapper = new ObjectMapper();
+        if (request.accepts("text/html")) {
+            String output = "error";
+            try {
+                Configuration cfg = new Configuration(Configuration.VERSION_2_3_30);
+                cfg.setClassLoaderForTemplateLoading(this.getClass().getClassLoader(), "/templates/");
+                cfg.setDefaultEncoding("UTF-8");
+                cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
+                cfg.setLogTemplateExceptions(false);
 
-        JsonNode jsonData = mapper.convertValue(result, JsonNode.class);
-        return ok(ApplicationUtil.createResponse(jsonData, true));
+                cfg.setWrapUncheckedExceptions(true);
+                cfg.setFallbackOnNullLoopVariable(false);
+                cfg.setNumberFormat("computer");
 
+                Template template = cfg.getTemplate("rutas.ftl");
+                StringWriter sw = new StringWriter();
+                Map<String, Object> mapa = new TreeMap<String, Object>();
+                mapa.put("rutas", result); // a ruta lo llamo "ruta"
+                template.process(mapa, sw);
+                output = sw.toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return ok(output).as("text/html");
+        } else {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonData = mapper.convertValue(result, JsonNode.class);
+            return ok(ApplicationUtil.createResponse(jsonData, true));
+
+        }
     }
 
     public Result delete(int id) throws SQLException, ClassNotFoundException {

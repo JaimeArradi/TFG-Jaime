@@ -2,14 +2,30 @@
 <meta charset="UTF-8">
 <html>
 <head>
-  <title>/Usuarios</title>
+    <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 15%;
+    }
 
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
 </head>
 <body>
 
-<div> <b> La lista de usuarios es: </b><br> <br>
 
-    <table style="width:5%">
+<h2>Lista de usuarios</h2>
+
+<table>
     <tr>
             <th>Id de usuario</th>
             <th>URI</th>
@@ -21,9 +37,6 @@
       </tr>
       </#list>
     </table>
-    </div>
-
-
 
 </body>
 </html>
