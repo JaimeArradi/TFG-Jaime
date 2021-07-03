@@ -50,7 +50,7 @@
     <td>${usuario.intercomunicador?string('Si', 'No')}</td>
     <td>
     <#list usuario.getInvitacionShort() as invitacion>
-    <br><a href="${invitacion.getUriInvitacion()!"No hay invitaciones"}">${invitacion.getUriInvitacion()!"No hay invitaciones"}</a></br>
+    <br><a href="${invitacion.getUriInvitacion()!}">${invitacion.getUriInvitacion()!}</a></br>
     </#list>
     </td>
 

@@ -46,7 +46,7 @@
     <td>${ruta.dificultad}</td>
     <td>
     <#list ruta.getValoraciones() as valoracion>
-        <br><a href="${valoracion.getUri()!"No ha valoraciones"}">${valoracion.getUri()!"No hay valoraciones"}</a></br>
+        <br><a href="${valoracion.getUri()!}">${valoracion.getUri()!}</a></br>
     </#list>
     </td>
     <td>${ruta.duracion}</td>

@@ -82,10 +82,10 @@ public class QuedadaController extends Controller {
                 cfg.setFallbackOnNullLoopVariable(false);
                 cfg.setNumberFormat("computer");
 
-                Template template = cfg.getTemplate("rutas.ftl");
+                Template template = cfg.getTemplate("quedadas.ftl");
                 StringWriter sw = new StringWriter();
                 Map<String, Object> mapa = new TreeMap<String, Object>();
-                mapa.put("rutas", result); // a ruta lo llamo "ruta"
+                mapa.put("quedadas", result);
                 template.process(mapa, sw);
                 output = sw.toString();
             } catch (Exception e) {

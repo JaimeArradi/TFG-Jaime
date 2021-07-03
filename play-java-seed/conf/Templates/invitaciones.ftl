@@ -23,7 +23,7 @@
 <body>
 
 
-<h2>Lista de invitaciones de una ruta</h2>
+<h2>Lista de invitaciones para una quedada</h2>
 
 <table>
     <tr>
