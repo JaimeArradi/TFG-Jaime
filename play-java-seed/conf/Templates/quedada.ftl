@@ -42,7 +42,7 @@
   </tr>
   <tr>
     <td>${quedada.name}</td>
-    <td>${quedada.getCreador().uri}</td>
+    <td><a href="${quedada.getCreador().uri}">${quedada.getCreador().uri}</a></td>
     <td>${quedada.horaInicial}</td>
     <td>${quedada.horaFinal}</td>
     <td>${quedada.lugarPartida}</td>
